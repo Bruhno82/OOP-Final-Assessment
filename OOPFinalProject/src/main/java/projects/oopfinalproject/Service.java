@@ -9,22 +9,22 @@ package projects.oopfinalproject;
  * @author chris
  */
 public class Service {
-    public int roomId;
+    public int bookingId;
     public String serviceType;
     public double price;
 
-    public Service(int roomId, String serviceType, double price) {
-        this.roomId = roomId;
+    public Service(int bookingId, String serviceType, double price) {
+        this.bookingId = bookingId;
         this.serviceType = serviceType;
         this.price = price;
     }
 
-    public int getRoomId() {
-        return roomId;
+    public int getBookingId() {
+        return bookingId;
     }
 
-    public void setRoomId(int roomId) {
-        this.roomId = roomId;
+    public void setBookingId(int bookingId) {
+        this.bookingId = bookingId;
     }
 
     public String getServiceType() {
@@ -43,5 +43,7 @@ public class Service {
         this.price = price;
     }
     
-    
+    public String saveString() {
+        return bookingId + "," + serviceType + "," + price;
+    }
 }

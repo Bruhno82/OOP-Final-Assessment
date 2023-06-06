@@ -6,21 +6,27 @@ package projects.oopfinalproject;
 
 import java.time.LocalDate;
 
-/**
- *
- * @author chris
- */
 public class CheckOut {
+    public int bookingId;
     public int roomId;
     public int clientId;
     public LocalDate date;
     public double charges;
 
-    public CheckOut(int roomId, int clientId, LocalDate date, double charges) {
+    public CheckOut(int bookingId, int roomId, int clientId, LocalDate date, double charges) {
+        this.bookingId = bookingId;
         this.roomId = roomId;
         this.clientId = clientId;
         this.date = date;
         this.charges = charges;
+    }
+
+    public int getBookingId() {
+        return bookingId;
+    }
+
+    public void setBookingId(int bookingId) {
+        this.bookingId = bookingId;
     }
 
     public int getRoomId() {
@@ -55,5 +61,7 @@ public class CheckOut {
         this.charges = charges;
     }
     
-    
+    public String saveString() {
+        return bookingId + "," + roomId + "," + clientId + "," + date + "," + charges;
+    }
 }

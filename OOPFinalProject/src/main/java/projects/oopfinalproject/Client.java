@@ -63,5 +63,7 @@ public class Client {
         this.regoNo = regoNo;
     }
     
-    
+    public String saveString() {
+        return clientId + "," + clientName + "," + phoneNo + "," + email + "," + regoNo;
+    }
 }

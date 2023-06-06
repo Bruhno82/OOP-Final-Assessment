@@ -10,16 +10,12 @@ package projects.oopfinalproject;
  */
 public class Room {
     public int roomId;
-    public String roomType;
-    public int bedrooms;
     public int beds;
     public double dailyRate;
     public boolean occupied;
 
-    public Room(int roomId, String roomType, int bedrooms, int beds, double dailyRate, boolean occupied) {
+    public Room(int roomId, int beds, double dailyRate, boolean occupied) {
         this.roomId = roomId;
-        this.roomType = roomType;
-        this.bedrooms = bedrooms;
         this.beds = beds;
         this.dailyRate = dailyRate;
         this.occupied = occupied;
@@ -31,22 +27,6 @@ public class Room {
 
     public void setRoomId(int roomId) {
         this.roomId = roomId;
-    }
-
-    public String getRoomType() {
-        return roomType;
-    }
-
-    public void setRoomType(String roomType) {
-        this.roomType = roomType;
-    }
-
-    public int getBedrooms() {
-        return bedrooms;
-    }
-
-    public void setBedrooms(int bedrooms) {
-        this.bedrooms = bedrooms;
     }
 
     public int getBeds() {
@@ -73,5 +53,28 @@ public class Room {
         this.occupied = occupied;
     }
     
+    public String saveString() {
+        return roomId + "," + beds + "," + dailyRate + "," + occupied;
+    }
+}
+
+class Suite extends Room {
+    private int bedrooms;
     
+    public Suite(int roomId, int beds, double dailyRate, boolean occupied, int rooms) {
+        super (roomId, beds, dailyRate, occupied);
+        this.bedrooms = bedrooms;
+    }
+
+    public int getBedrooms() {
+        return bedrooms;
+    }
+
+    public void setBedrooms(int bedrooms) {
+        this.bedrooms = bedrooms;
+    }
+    
+    public String saveString() {
+        return roomId + "," + beds + "," + dailyRate + "," + occupied + "," + bedrooms;
+    }
 }

@@ -35,7 +35,7 @@ public class BookingHandler {
             LocalDate checkIn = null;
             LocalDate checkOut = null;
             double charges = 0.0;
-            int carpark = 0; // MAy need to move this to another part of the app
+            int carpark = 0; // May need to move this to another part of the app
             
             // Read each line of the file
             while(in.hasNextLine()) {

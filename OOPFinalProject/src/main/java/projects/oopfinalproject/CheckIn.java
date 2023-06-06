@@ -11,14 +11,24 @@ import java.time.LocalDate;
  * @author chris
  */
 public class CheckIn {
+    public int bookingId;
     public int roomId;
     public int clientId;
     public LocalDate date;
 
-    public CheckIn(int roomId, int clientId, LocalDate date) {
+    public CheckIn(int bookingId, int roomId, int clientId, LocalDate date) {
+        this.bookingId = bookingId;
         this.roomId = roomId;
         this.clientId = clientId;
         this.date = date;
+    }
+
+    public int getBookingId() {
+        return bookingId;
+    }
+
+    public void setBookingId(int bookingId) {
+        this.bookingId = bookingId;
     }
 
     public int getRoomId() {
@@ -45,5 +55,7 @@ public class CheckIn {
         this.date = date;
     }
     
-    
+    public String saveString() {
+        return bookingId + "," + roomId + "," + clientId + "," + date;
+    }
 }
