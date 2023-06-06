@@ -84,5 +84,8 @@ public class Booking {
     public void setCarpark(int carpark) {
         this.carpark = carpark;
     }
-    
+
+    public String saveString() {
+        return bookingId + "," + clientId + "," + roomId + "," + checkIn + "," + checkOut + "," + charges + "," + carpark;
+    }
 }
