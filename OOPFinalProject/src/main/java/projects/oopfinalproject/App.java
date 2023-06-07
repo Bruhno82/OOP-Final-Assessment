@@ -32,6 +32,12 @@ public class App extends Application {
         createDataFiles();
         
         bookingData = new BookingHandler("bookings.txt");
+        checkInData = new CheckInHandler("CheckIn.txt");
+        checkOutData = new CheckOutHandler("checkOut.txt");
+        clientData = new ClientHandler("clients.txt");
+        invoiceData = new InvoiceHandler("invoices.txt");
+        roomData = new RoomHandler("rooms.txt");
+        serviceData = new ServiceHandler("services.txt");
         
         
         scene = new Scene(loadFXML("main"), 640, 480);
