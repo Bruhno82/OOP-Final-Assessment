@@ -18,7 +18,7 @@ public class App extends Application {
     
     private static BookingHandler bookingData;
     private static CheckInHandler checkInData;
-    private static CheckOutHandler checkOutData;
+    //private static CheckOutHandler checkOutData;
     private static ClientHandler clientData;
     private static InvoiceHandler invoiceData;
     private static RoomHandler roomData;
@@ -31,7 +31,7 @@ public class App extends Application {
         
         bookingData = new BookingHandler("bookings.txt");
         checkInData = new CheckInHandler("checkIn.txt");
-        checkOutData = new CheckOutHandler("checkOut.txt");
+        //checkOutData = new CheckOutHandler("checkOut.txt");
         clientData = new ClientHandler("clients.txt");
         invoiceData = new InvoiceHandler("invoices.txt");
         roomData = new RoomHandler("rooms.txt");
@@ -61,9 +61,9 @@ public class App extends Application {
         return checkInData;
     }
     
-    public static CheckOutHandler getCheckOutData() {
+    /**public static CheckOutHandler getCheckOutData() {
         return checkOutData;
-    }
+    }*/
     
     public static ClientHandler getClientData() {
         return clientData;
