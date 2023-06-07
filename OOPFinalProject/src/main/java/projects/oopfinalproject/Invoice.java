@@ -55,5 +55,7 @@ public class Invoice {
         this.paid = paid;
     }
     
-    
+    public String saveString() {
+        return invoiceNo + "," + date + "," + total + "," + paid;
+    }
 }
