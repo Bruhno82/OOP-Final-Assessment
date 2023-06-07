@@ -1,13 +1,11 @@
 package projects.oopfinalproject;
 
 import java.io.File;
-import java.io.FileWriter;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 
 /**
@@ -32,6 +30,13 @@ public class App extends Application {
         createDataFiles();
         
         bookingData = new BookingHandler("bookings.txt");
+        checkInData = new CheckInHandler("checkIn.txt");
+        checkOutData = new CheckOutHandler("checkOut.txt");
+        clientData = new ClientHandler("clients.txt");
+        invoiceData = new InvoiceHandler("invoices.txt");
+        roomData = new RoomHandler("rooms.txt");
+        serviceData = new ServiceHandler("services.txt");
+        
         
         
         scene = new Scene(loadFXML("primary"), 640, 480);
