@@ -43,14 +43,14 @@ public class CheckOutHandler {
                 // Parse the tokens and extract booking information
                 while (st.hasMoreTokens()) {
                     bookingId = Integer.parseInt(st.nextToken());
-                    clientId = Integer.parseInt(st.nextToken());
                     roomId = Integer.parseInt(st.nextToken());
+                    clientId = Integer.parseInt(st.nextToken());
                     checkOut = LocalDate.parse(st.nextToken());
                     charges = Double.parseDouble(st.nextToken());
                 }
                 
                 // Create a new booking object
-                CheckOut c = new CheckOut(bookingId, clientId, roomId, checkOut, charges);
+                CheckOut c = new CheckOut(bookingId, roomId, clientId, checkOut, charges);
                 checkOuts.add(c);
             }
             
