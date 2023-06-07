@@ -118,9 +118,37 @@ public class App extends Application {
                     break;
                 case "rooms.txt":
                     createFile(fileName);
+                    RoomHandler rh = new RoomHandler(fileName);
+                    // Create rooms
+                    for (int i = 1; i <= 30; i++) {
+                        Room room = new Room(i, 2, 100.0, false);
+                        rh.addRoom(room);
+                    }
+                    
+                    // Create suites
+                    for (int i = 31; i <= 40; i++) {
+                        Suite suite = new Suite(i, 4, 200.0, false, 2);
+                        rh.addRoom(suite);
+                    }
+                    
+                    rh.saveRoom();
                     break;
                 case "services.txt":
                     createFile(fileName);
+                    ServiceHandler sh = new ServiceHandler(fileName);
+
+                    // Create multiple Service objects
+                    Service service1 = new Service(1, "Cleaning", 10.99);
+                    Service service2 = new Service(2, "Laundry", 15.99);
+                    Service service3 = new Service(3, "Room Service", 20.99);
+
+                    // Add the Service objects to the services list
+                    sh.addService(service1);
+                    sh.addService(service2);
+                    sh.addService(service3);
+
+                    // Save the updated service data to the file
+                    sh.saveService();
                     break;
             }
         }
