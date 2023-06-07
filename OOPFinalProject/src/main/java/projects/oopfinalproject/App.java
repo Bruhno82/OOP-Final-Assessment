@@ -34,7 +34,7 @@ public class App extends Application {
         bookingData = new BookingHandler("bookings.txt");
         
         
-        scene = new Scene(loadFXML("primary"), 640, 480);
+        scene = new Scene(loadFXML("main"), 640, 480);
         stage.setScene(scene);
         stage.show();
     }
