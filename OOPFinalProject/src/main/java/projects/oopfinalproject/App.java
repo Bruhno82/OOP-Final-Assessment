@@ -1,11 +1,13 @@
 package projects.oopfinalproject;
 
 import java.io.File;
+import java.io.FileWriter;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 
 /**
@@ -18,7 +20,7 @@ public class App extends Application {
     
     private static BookingHandler bookingData;
     private static CheckInHandler checkInData;
-    //private static CheckOutHandler checkOutData;
+    private static CheckOutHandler checkOutData;
     private static ClientHandler clientData;
     private static InvoiceHandler invoiceData;
     private static RoomHandler roomData;
@@ -30,13 +32,6 @@ public class App extends Application {
         createDataFiles();
         
         bookingData = new BookingHandler("bookings.txt");
-        checkInData = new CheckInHandler("checkIn.txt");
-        //checkOutData = new CheckOutHandler("checkOut.txt");
-        clientData = new ClientHandler("clients.txt");
-        invoiceData = new InvoiceHandler("invoices.txt");
-        roomData = new RoomHandler("rooms.txt");
-        serviceData = new ServiceHandler("services.txt");
-        
         
         
         scene = new Scene(loadFXML("main"), 640, 480);
@@ -61,9 +56,9 @@ public class App extends Application {
         return checkInData;
     }
     
-    /**public static CheckOutHandler getCheckOutData() {
+    public static CheckOutHandler getCheckOutData() {
         return checkOutData;
-    }*/
+    }
     
     public static ClientHandler getClientData() {
         return clientData;

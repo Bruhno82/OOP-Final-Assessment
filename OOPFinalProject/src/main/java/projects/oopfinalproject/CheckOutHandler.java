@@ -48,9 +48,9 @@ public class CheckOutHandler {
                     checkOut = LocalDate.parse(st.nextToken());
                     charges = Double.parseDouble(st.nextToken());
                 }
-                
+                                
                 // Create a new booking object
-                CheckOut c = new CheckOut(bookingId, roomId, clientId, checkOut, charges);
+                CheckOut c = new CheckOut(bookingId, clientId, roomId, checkOut, charges);
                 checkOuts.add(c);
             }
             
