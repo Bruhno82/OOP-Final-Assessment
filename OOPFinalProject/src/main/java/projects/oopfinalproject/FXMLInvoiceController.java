@@ -12,15 +12,11 @@ import javafx.fxml.Initializable;
 
 import javafx.scene.control.Button;
 
-public class CheckController implements Initializable {
+public class FXMLInvoiceController implements Initializable {
 
 
     @FXML
-    private Button buttonCheckIn;
-    @FXML
-    private Button buttonSearchBooking;
-    @FXML
-    private Button buttonCheckOut;
+    private Button buttonSearchInvoice;
     @FXML
     private Button buttonExit;
     /**
@@ -32,15 +28,7 @@ public class CheckController implements Initializable {
     }    
     
     @FXML
-    private void handleButtonCheckIn(ActionEvent event) {
-    }
-
-    @FXML
-    private void handleButtonSearchBooking(ActionEvent event) {
-    }
-
-    @FXML
-    private void handleButtonCheckOut(ActionEvent event) {
+    private void handleButtonSearchInvoice(ActionEvent event) {
     }
 
     @FXML

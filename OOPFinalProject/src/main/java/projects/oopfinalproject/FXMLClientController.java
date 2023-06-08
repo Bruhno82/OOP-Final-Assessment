@@ -12,7 +12,7 @@ import javafx.fxml.Initializable;
 
 import javafx.scene.control.Button;
 
-public class ClientController implements Initializable {
+public class FXMLClientController implements Initializable {
 
 
     @FXML

@@ -6,7 +6,7 @@
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" fx:id="txtBookingId" prefHeight="457.0" prefWidth="558.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projects.oopfinalproject.FXMLBookingController">
+<AnchorPane id="AnchorPane" prefHeight="457.0" prefWidth="558.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projects.oopfinalproject.FXMLBookingController">
    <children>
       <TitledPane alignment="CENTER" animated="false" prefHeight="26.0" prefWidth="559.0" text="Booking" />
     <Button fx:id="buttonUpdateBooker" layoutX="308.0" layoutY="214.0" mnemonicParsing="false" onAction="#handleButtonUpdateBooking" prefHeight="30.0" prefWidth="164.0" text="Update Booking" />

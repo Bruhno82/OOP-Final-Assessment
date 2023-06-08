@@ -10,8 +10,10 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 
 public class MainMenuController implements Initializable {
 
@@ -35,27 +37,33 @@ public class MainMenuController implements Initializable {
     }    
     
     @FXML
-    private void handleButtonBookings(ActionEvent event) throws IOException {
+    private void handleButtonBookings() throws IOException {
         App.setRoot("Booking");
     }
 
     @FXML
-    private void handleButtonClientInformation(ActionEvent event) throws IOException {
+    private void handleButtonClientInformation() throws IOException {
         App.setRoot("Client");
     }
 
     @FXML
-    private void handleButtonInvoices(ActionEvent event) throws IOException {
+    private void handleButtonInvoices() throws IOException {
         App.setRoot("Invoices");
     }
 
     @FXML
-    private void handleButtonCheck(ActionEvent event) throws IOException {
+    private void handleButtonCheck() throws IOException {
         App.setRoot("Check");
     }
 
     @FXML
-    private void handleButtonExitAction(ActionEvent event) {
+    private void handleButtonExitAction() {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to Close?");
+        alert.showAndWait().ifPresent(response -> {
+            if (response == ButtonType.OK) {
+                System.exit(0);
+            }
+        });
     }
 
 }
