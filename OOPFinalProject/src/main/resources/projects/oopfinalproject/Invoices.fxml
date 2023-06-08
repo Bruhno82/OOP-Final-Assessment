@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="457.0" prefWidth="558.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projects.oopfinalproject.FXMLInvoiceController">
+   <children>
+      <TitledPane alignment="CENTER" animated="false" prefHeight="26.0" prefWidth="559.0" text="Invoices" />
+      <Button fx:id="buttonSearchInvoice" layoutX="308.0" layoutY="94.0" mnemonicParsing="false" onAction="#handleButtonSearchInvoice" prefHeight="30.0" prefWidth="164.0" text="Search for Invoice" />
+      <Button fx:id="buttonExit" layoutX="308.0" layoutY="401.0" mnemonicParsing="false" onAction="#handleButtonExitAction" prefHeight="30.0" prefWidth="164.0" text="Exit" />
+      <TextField layoutX="105.0" layoutY="96.0" promptText="Enter Invoice ID" />
+      <TextArea layoutX="25.0" layoutY="139.0" prefHeight="229.0" prefWidth="504.0" promptText="Invoice Appears Here" />
+   </children>
+</AnchorPane>
