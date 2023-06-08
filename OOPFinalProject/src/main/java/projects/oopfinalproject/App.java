@@ -18,13 +18,13 @@ public class App extends Application {
 
     private static Scene scene;
     
-    private static BookingHandler bookingData;
-    private static CheckInHandler checkInData;
-    private static CheckOutHandler checkOutData;
-    private static ClientHandler clientData;
-    private static InvoiceHandler invoiceData;
-    private static RoomHandler roomData;
-    private static ServiceHandler serviceData;
+    public static BookingHandler bookingData;
+    public static CheckInHandler checkInData;
+    public static CheckOutHandler checkOutData;
+    public static ClientHandler clientData;
+    public static InvoiceHandler invoiceData;
+    public static RoomHandler roomData;
+    public static ServiceHandler serviceData;
     
 
     @Override
@@ -182,7 +182,7 @@ public class App extends Application {
         }
     }
     
-    public void saveData() {
+    public static void saveData() {
         bookingData.saveBooking();
         checkInData.saveCheckIn();
         checkOutData.saveCheckOut();

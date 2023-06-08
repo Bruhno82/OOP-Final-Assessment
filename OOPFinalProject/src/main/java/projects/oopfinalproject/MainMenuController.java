@@ -61,6 +61,7 @@ public class MainMenuController implements Initializable {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to Close?");
         alert.showAndWait().ifPresent(response -> {
             if (response == ButtonType.OK) {
+                App.saveData();
                 System.exit(0);
             }
         });
