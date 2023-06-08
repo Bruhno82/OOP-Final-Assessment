@@ -96,74 +96,87 @@ public class App extends Application {
     }
     
     // Check if files exist and create them if they do not
-    private void createDataFiles() {
+    private void createDataFiles() throws IOException {
         String[] fileNames = {"bookings.txt", "checkIn.txt", "checkOut.txt", "clients.txt", "invoices.txt", "rooms.txt", "services.txt"};
     
         for (String fileName : fileNames) {
+            File file = new File(fileName);
             switch (fileName) {
                 case "bookings.txt":
-                    createFile(fileName);
+                    if (!file.exists()) {
+                        file.createNewFile();
+                    }
                     break;
                 case "checkIn.txt":
-                    createFile(fileName);
+                    if (!file.exists()) {
+                        file.createNewFile();
+                    }
                     break;
                 case "checkOut.txt":
-                    createFile(fileName);
+                    if (!file.exists()) {
+                        file.createNewFile();
+                    }
                     break;
                 case "clients.txt":
-                    createFile(fileName);
-                    ClientHandler ch = new ClientHandler(fileName);
+                    if (!file.exists()) {
+                        file.createNewFile();
+                        
+                        ClientHandler ch = new ClientHandler(fileName);
                     
-                    Client client1 = new Client(1, "John Smith", "0412 345 678", "john@example.com", "REG001");
-                    Client client2 = new Client(2, "Jane Doe", "0413 456 789", "jane@example.com", "REG002");
-                    Client client3 = new Client(3, "Michael Johnson", "0414 567 890", "michael@example.com", "REG003");
-                    Client client4 = new Client(4, "Emily Davis", "0415 678 901", "emily@example.com", "REG004");
-                    Client client5 = new Client(5, "David Wilson", "0416 789 012", "david@example.com", "REG005");
-                    
-                    ch.addClient(client1);
-                    ch.addClient(client2);
-                    ch.addClient(client3);
-                    ch.addClient(client4);
-                    ch.addClient(client5);
-                    
-                    ch.saveClient();
+                        Client client1 = new Client(1, "John Smith", "0412 345 678", "john@example.com", "REG001");
+                        Client client2 = new Client(2, "Jane Doe", "0413 456 789", "jane@example.com", "REG002");
+                        Client client3 = new Client(3, "Michael Johnson", "0414 567 890", "michael@example.com", "REG003");
+                        Client client4 = new Client(4, "Emily Davis", "0415 678 901", "emily@example.com", "REG004");
+                        Client client5 = new Client(5, "David Wilson", "0416 789 012", "david@example.com", "REG005");
+
+                        ch.addClient(client1);
+                        ch.addClient(client2);
+                        ch.addClient(client3);
+                        ch.addClient(client4);
+                        ch.addClient(client5);
+
+                        ch.saveClient();
+                    }
                     break;
                 case "invoices.txt":
                     createFile(fileName);
                     break;
                 case "rooms.txt":
-                    createFile(fileName);
-                    RoomHandler rh = new RoomHandler(fileName);
-                    // Create rooms
-                    for (int i = 1; i <= 30; i++) {
-                        Room room = new Room(i, 2, 100.0, false);
-                        rh.addRoom(room);
+                    if (!file.exists()) {
+                        file.createNewFile();
+                        
+                        RoomHandler rh = new RoomHandler(fileName);
+                        // Create rooms
+                        for (int i = 1; i <= 30; i++) {
+                            Room room = new Room(i, 2, 100.0, false);
+                            rh.addRoom(room);
+                        }
+
+                        // Create suites
+                        for (int i = 31; i <= 40; i++) {
+                            Suite suite = new Suite(i, 4, 200.0, false, 2);
+                            rh.addRoom(suite);
+                        }
+                        rh.saveRoom();
                     }
-                    
-                    // Create suites
-                    for (int i = 31; i <= 40; i++) {
-                        Suite suite = new Suite(i, 4, 200.0, false, 2);
-                        rh.addRoom(suite);
-                    }
-                    
-                    rh.saveRoom();
                     break;
                 case "services.txt":
-                    createFile(fileName);
-                    ServiceHandler sh = new ServiceHandler(fileName);
+                    if (!file.exists()) {
+                        file.createNewFile();
+                        
+                        ServiceHandler sh = new ServiceHandler(fileName);
+                        // Create multiple Service objects
+                        Service service1 = new Service(1, "Cleaning", 10.99);
+                        Service service2 = new Service(2, "Laundry", 15.99);
+                        Service service3 = new Service(3, "Room Service", 20.99);
 
-                    // Create multiple Service objects
-                    Service service1 = new Service(1, "Cleaning", 10.99);
-                    Service service2 = new Service(2, "Laundry", 15.99);
-                    Service service3 = new Service(3, "Room Service", 20.99);
-
-                    // Add the Service objects to the services list
-                    sh.addService(service1);
-                    sh.addService(service2);
-                    sh.addService(service3);
-
-                    // Save the updated service data to the file
-                    sh.saveService();
+                        // Add the Service objects to the services list
+                        sh.addService(service1);
+                        sh.addService(service2);
+                        sh.addService(service3);
+                            
+                        sh.saveService();
+                        }
                     break;
             }
         }

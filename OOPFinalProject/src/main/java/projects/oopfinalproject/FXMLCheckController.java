@@ -4,13 +4,16 @@
  */
 package projects.oopfinalproject;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 
 public class FXMLCheckController implements Initializable {
 
@@ -44,7 +47,17 @@ public class FXMLCheckController implements Initializable {
     }
 
     @FXML
-    private void handleButtonExitAction(ActionEvent event) {
+    private void handleButtonExitAction() throws IOException {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to Close?");
+        alert.showAndWait().ifPresent(response -> {
+            if (response == ButtonType.OK) {
+                try {
+                    App.setRoot("Main Menu");
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
     }
 
 }
