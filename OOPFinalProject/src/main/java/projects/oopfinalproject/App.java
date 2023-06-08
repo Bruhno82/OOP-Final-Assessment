@@ -40,7 +40,7 @@ public class App extends Application {
         serviceData = new ServiceHandler("services.txt");
         
         
-        scene = new Scene(loadFXML("main"), 640, 480);
+        scene = new Scene(loadFXML("Main Menu"), 640, 480);
         stage.setScene(scene);
         stage.show();
     }
@@ -112,6 +112,21 @@ public class App extends Application {
                     break;
                 case "clients.txt":
                     createFile(fileName);
+                    ClientHandler ch = new ClientHandler(fileName);
+                    
+                    Client client1 = new Client(1, "John Smith", "0412 345 678", "john@example.com", "REG001");
+                    Client client2 = new Client(2, "Jane Doe", "0413 456 789", "jane@example.com", "REG002");
+                    Client client3 = new Client(3, "Michael Johnson", "0414 567 890", "michael@example.com", "REG003");
+                    Client client4 = new Client(4, "Emily Davis", "0415 678 901", "emily@example.com", "REG004");
+                    Client client5 = new Client(5, "David Wilson", "0416 789 012", "david@example.com", "REG005");
+                    
+                    ch.addClient(client1);
+                    ch.addClient(client2);
+                    ch.addClient(client3);
+                    ch.addClient(client4);
+                    ch.addClient(client5);
+                    
+                    ch.saveClient();
                     break;
                 case "invoices.txt":
                     createFile(fileName);
@@ -152,6 +167,16 @@ public class App extends Application {
                     break;
             }
         }
+    }
+    
+    public void saveData() {
+        bookingData.saveBooking();
+        checkInData.saveCheckIn();
+        checkOutData.saveCheckOut();
+        clientData.saveClient();
+        invoiceData.saveInvoice();
+        roomData.saveRoom();
+        serviceData.saveService();
     }
     
 
