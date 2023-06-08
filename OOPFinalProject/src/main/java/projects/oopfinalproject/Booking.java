@@ -5,6 +5,7 @@
 package projects.oopfinalproject;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 /**
  *
@@ -77,5 +78,19 @@ public class Booking {
 
     public String saveString() {
         return bookingId + "," + clientId + "," + roomId + "," + checkIn + "," + checkOut + "," + charges;
+    }
+    
+    public String displayString() {
+        // get client name
+        ArrayList<Client> clientDetails = new ArrayList<>();
+        for (Client c : App.getClientData().getClients()) {
+            if (clientId == c.getClientId()) {
+                clientDetails.add(c);
+            }
+        }
+        String clientName = clientDetails.get(0).getClientName();
+        
+        return "Booking ID: " + bookingId + ", Client Name: " + clientName +
+                "\n Room number: " + roomId;
     }
 }
