@@ -7,6 +7,7 @@ package projects.oopfinalproject;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.Iterator;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -36,7 +37,7 @@ public class FXMLBookingController implements Initializable {
     private Button buttonSearchBooking;
 
     @FXML
-    private Button buttonUpdateBooker;
+    private Button buttonUpdate;
 
     @FXML
     private DatePicker dateCheckIn;
@@ -65,11 +66,26 @@ public class FXMLBookingController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        buttonUpdate.setVisible(false);
+        buttonCancelBooking.setVisible(false);
     }    
     
     @FXML
-    private void handleButtonUpdateBooking(ActionEvent event) {
+    private void handleButtonUpdateBooking() throws IOException {
+        bookingId = Integer.parseInt(txtBookingId.getText());
+        
+        // delete booking
+        Iterator<Booking> iterator = App.getBookingData().getBookings().iterator();
+        while (iterator.hasNext()) {
+            Booking booking = iterator.next();
+            if (bookingId == booking.getBookingId()) {
+                iterator.remove(); // Remove the booking from the array
+                break;
+            }
+        }
+        
+        // add modified booking
+        handleButtonCreateBooking();
     }
 
     @FXML
@@ -83,6 +99,12 @@ public class FXMLBookingController implements Initializable {
                 for (Booking b : App.getBookingData().getBookings()) {
                     if (bookingId == b.getBookingId()) {
                         bookingFound = true;
+                        txtClientId.setText(String.valueOf(b.getClientId()));
+                        txtRoomId.setText(String.valueOf(b.getRoomId()));
+                        dateCheckIn.setValue(b.getCheckIn());
+                        dateCheckOut.setValue(b.getCheckOut());
+                        buttonUpdate.setVisible(true);
+                        buttonCancelBooking.setVisible(true);
                         break;
                     }
                 }
@@ -96,7 +118,7 @@ public class FXMLBookingController implements Initializable {
     }
 
     @FXML
-    private void handleButtonCreateBooking(ActionEvent event) throws IOException {
+    private void handleButtonCreateBooking() throws IOException {
         if (txtBookingId.getText().isBlank() || txtClientId.getText().isBlank() || txtRoomId.getText().isBlank()) {
             JOptionPane.showMessageDialog(null, "All fields are required", "Invalid input", JOptionPane.INFORMATION_MESSAGE);
             return;
@@ -169,6 +191,26 @@ public class FXMLBookingController implements Initializable {
 
     @FXML
     private void handleButtonCancelBooking(ActionEvent event) {
+        bookingId = Integer.parseInt(txtBookingId.getText());
+        
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to cancel this booking?");
+        alert.showAndWait().ifPresent(response -> {
+            if (response == ButtonType.OK) {
+                Iterator<Booking> iterator = App.getBookingData().getBookings().iterator();
+                while (iterator.hasNext()) {
+                    Booking booking = iterator.next();
+                    if (bookingId == booking.getBookingId()) {
+                        iterator.remove(); // Remove the booking from the array
+                        break;
+                    }
+                }
+                JOptionPane.showMessageDialog(null, "Booking cancelled", "Cancelled", JOptionPane.INFORMATION_MESSAGE);
+                try {
+                    App.setRoot("Main Menu");
+                } catch (IOException ex) {
+                }
+            }
+        });
     }
 
     @FXML
