@@ -35,7 +35,6 @@ public class BookingHandler {
             LocalDate checkIn = null;
             LocalDate checkOut = null;
             double charges = 0.0;
-            int carpark = 0; // May need to move this to another part of the app
             
             // Read each line of the file
             while(in.hasNextLine()) {
@@ -50,11 +49,10 @@ public class BookingHandler {
                     checkIn = LocalDate.parse(st.nextToken());
                     checkOut = LocalDate.parse(st.nextToken());
                     charges = Double.parseDouble(st.nextToken());
-                    carpark = Integer.parseInt(st.nextToken());
                 }
                 
                 // Create a new booking object
-                Booking b = new Booking(bookingId, clientId, roomId, checkIn, checkOut, charges, carpark);
+                Booking b = new Booking(bookingId, clientId, roomId, checkIn, checkOut, charges);
                 bookings.add(b);
             }
             

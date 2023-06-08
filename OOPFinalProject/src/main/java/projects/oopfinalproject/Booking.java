@@ -17,16 +17,14 @@ public class Booking {
     public LocalDate checkIn;
     public LocalDate checkOut;
     public double charges;
-    public int carpark;
 
-    public Booking(int bookingId, int clientId, int roomId, LocalDate checkIn, LocalDate checkOut, double charges, int carpark) {
+    public Booking(int bookingId, int clientId, int roomId, LocalDate checkIn, LocalDate checkOut, double charges) {
         this.bookingId = bookingId;
         this.clientId = clientId;
         this.roomId = roomId;
         this.checkIn = checkIn;
         this.checkOut = checkOut;
         this.charges = charges;
-        this.carpark = carpark;
     }
 
     public int getBookingId() {
@@ -77,15 +75,7 @@ public class Booking {
         this.charges = charges;
     }
 
-    public int getCarpark() {
-        return carpark;
-    }
-
-    public void setCarpark(int carpark) {
-        this.carpark = carpark;
-    }
-
     public String saveString() {
-        return bookingId + "," + clientId + "," + roomId + "," + checkIn + "," + checkOut + "," + charges + "," + carpark;
+        return bookingId + "," + clientId + "," + roomId + "," + checkIn + "," + checkOut + "," + charges;
     }
 }
