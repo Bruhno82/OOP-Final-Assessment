@@ -9,14 +9,13 @@
    <children>
       <TitledPane alignment="CENTER" animated="false" prefHeight="26.0" prefWidth="559.0" text="Client Information" />
     <Button fx:id="buttonUpdateClient" layoutX="308.0" layoutY="214.0" mnemonicParsing="false" onAction="#handleButtonUpdateClient" prefHeight="30.0" prefWidth="164.0" text="Update Client" />
-      <Button fx:id="buttonSearchCLient" layoutX="308.0" layoutY="49.0" mnemonicParsing="false" onAction="#handleButtonSearchClient" prefHeight="30.0" prefWidth="164.0" text="Search for Client" />
+      <Button fx:id="buttonSearchClient" layoutX="308.0" layoutY="49.0" mnemonicParsing="false" onAction="#handleButtonSearchClient" prefHeight="30.0" prefWidth="164.0" text="Search for Client" />
       <Button fx:id="buttonCreateClient" layoutX="308.0" layoutY="294.0" mnemonicParsing="false" onAction="#handleButtonCreateClient" prefHeight="30.0" prefWidth="164.0" text="Create Client" />
       <Button fx:id="buttonDeleteClient" layoutX="308.0" layoutY="254.0" mnemonicParsing="false" onAction="#handleButtonDeleteClient" prefHeight="30.0" prefWidth="164.0" text="Delete Client" />
       <Button fx:id="buttonExit" layoutX="308.0" layoutY="401.0" mnemonicParsing="false" onAction="#handleButtonExitAction" prefHeight="30.0" prefWidth="164.0" text="Exit" />
-      <TextField layoutX="103.0" layoutY="269.0" promptText="Enter Email Address" />
-      <TextField layoutX="103.0" layoutY="52.0" promptText="Enter Client ID" />
-      <TextField layoutX="103.0" layoutY="160.0" promptText="Enter Phone Number" />
-      <TextField layoutX="103.0" layoutY="214.0" promptText="Enter Registration" />
-      <TextField layoutX="103.0" layoutY="106.0" promptText="Enter Client Name" />
+      <TextField fx:id="txtEmail" layoutX="103.0" layoutY="216.0" promptText="Enter Email Address" />
+      <TextField fx:id="txtClientId" layoutX="103.0" layoutY="52.0" promptText="Enter Client ID" />
+      <TextField fx:id="txtPhoneNo" layoutX="103.0" layoutY="160.0" promptText="Enter Phone Number" />
+      <TextField fx:id="txtClientName" layoutX="103.0" layoutY="106.0" promptText="Enter Client Name" />
    </children>
 </AnchorPane>

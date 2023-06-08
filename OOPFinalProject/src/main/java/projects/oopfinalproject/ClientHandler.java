@@ -6,7 +6,6 @@ package projects.oopfinalproject;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.*;
 import javax.swing.JOptionPane;
@@ -33,7 +32,6 @@ public class ClientHandler {
             String clientName = "";
             String phoneNo = "";
             String email = "";
-            String regoNo = "";
             
             // Read each line of the file
             while(in.hasNextLine()) {
@@ -46,11 +44,10 @@ public class ClientHandler {
                     clientName = st.nextToken();
                     phoneNo = st.nextToken();
                     email = st.nextToken();
-                    regoNo = st.nextToken();
                 }
                 
                 // Create a new booking object
-                Client c = new Client(clientId, clientName, phoneNo, email, regoNo);
+                Client c = new Client(clientId, clientName, phoneNo, email);
                 clients.add(c);
             }
             

@@ -13,14 +13,12 @@ public class Client {
     public String clientName;
     public String phoneNo;
     public String email;
-    public String regoNo;
 
-    public Client(int clientId, String clientName, String phoneNo, String email, String regoNo) {
+    public Client(int clientId, String clientName, String phoneNo, String email) {
         this.clientId = clientId;
         this.clientName = clientName;
         this.phoneNo = phoneNo;
         this.email = email;
-        this.regoNo = regoNo;
     }
 
     public int getClientId() {
@@ -54,16 +52,8 @@ public class Client {
     public void setEmail(String email) {
         this.email = email;
     }
-
-    public String getRegoNo() {
-        return regoNo;
-    }
-
-    public void setRegoNo(String regoNo) {
-        this.regoNo = regoNo;
-    }
     
     public String saveString() {
-        return clientId + "," + clientName + "," + phoneNo + "," + email + "," + regoNo;
+        return clientId + "," + clientName + "," + phoneNo + "," + email;
     }
 }

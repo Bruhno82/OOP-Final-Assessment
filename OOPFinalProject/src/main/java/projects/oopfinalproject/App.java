@@ -123,11 +123,11 @@ public class App extends Application {
                         
                         ClientHandler ch = new ClientHandler(fileName);
                     
-                        Client client1 = new Client(1, "John Smith", "0412 345 678", "john@example.com", "REG001");
-                        Client client2 = new Client(2, "Jane Doe", "0413 456 789", "jane@example.com", "REG002");
-                        Client client3 = new Client(3, "Michael Johnson", "0414 567 890", "michael@example.com", "REG003");
-                        Client client4 = new Client(4, "Emily Davis", "0415 678 901", "emily@example.com", "REG004");
-                        Client client5 = new Client(5, "David Wilson", "0416 789 012", "david@example.com", "REG005");
+                        Client client1 = new Client(1, "John Smith", "0412 345 678", "john@example.com");
+                        Client client2 = new Client(2, "Jane Doe", "0413 456 789", "jane@example.com");
+                        Client client3 = new Client(3, "Michael Johnson", "0414 567 890", "michael@example.com");
+                        Client client4 = new Client(4, "Emily Davis", "0415 678 901", "emily@example.com");
+                        Client client5 = new Client(5, "David Wilson", "0416 789 012", "david@example.com");
 
                         ch.addClient(client1);
                         ch.addClient(client2);
