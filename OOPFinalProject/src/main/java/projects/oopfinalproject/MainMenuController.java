@@ -4,6 +4,7 @@
  */
 package projects.oopfinalproject;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -34,19 +35,23 @@ public class MainMenuController implements Initializable {
     }    
     
     @FXML
-    private void handleButtonBookings(ActionEvent event) {
+    private void handleButtonBookings(ActionEvent event) throws IOException {
+        App.setRoot("Booking");
     }
 
     @FXML
-    private void handleButtonClientInformation(ActionEvent event) {
+    private void handleButtonClientInformation(ActionEvent event) throws IOException {
+        App.setRoot("Client");
     }
 
     @FXML
-    private void handleButtonInvoices(ActionEvent event) {
+    private void handleButtonInvoices(ActionEvent event) throws IOException {
+        App.setRoot("Invoices");
     }
 
     @FXML
-    private void handleButtonCheck(ActionEvent event) {
+    private void handleButtonCheck(ActionEvent event) throws IOException {
+        App.setRoot("Check");
     }
 
     @FXML

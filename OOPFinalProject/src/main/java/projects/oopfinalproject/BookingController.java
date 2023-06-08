@@ -4,27 +4,44 @@
  */
 package projects.oopfinalproject;
 
-import java.net.URL;
-import java.util.ResourceBundle;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.TextField;
 
-public class BookingController implements Initializable {
+public class BookingController {
 
+    @FXML
+    private Button buttonCancelBooking;
+
+    @FXML
+    private Button buttonCreateBooking;
+
+    @FXML
+    private Button buttonExit;
+
+    @FXML
+    private Button buttonSearchBooking;
 
     @FXML
     private Button buttonUpdateBooker;
+
     @FXML
-    private Button buttonSearchBooking;
+    private DatePicker dateCheckIn;
+
     @FXML
-    private Button buttonCreateBooking;
+    private DatePicker dateCheckOut;
+
     @FXML
-    private Button buttonCancelBooking;
+    private TextField txtBookingId;
+
     @FXML
-    private Button buttonExit;
+    private TextField txtClientId;
+
+    @FXML
+    private TextField txtRoomId;
     /**
      * Initializes the controller class.
      */

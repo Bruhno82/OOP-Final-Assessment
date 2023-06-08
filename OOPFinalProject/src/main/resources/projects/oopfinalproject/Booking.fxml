@@ -6,7 +6,7 @@
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="457.0" prefWidth="558.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projects.oopfinalproject.FXMLBookingController">
+<AnchorPane id="AnchorPane" fx:id="txtBookingId" prefHeight="457.0" prefWidth="558.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projects.oopfinalproject.FXMLBookingController">
    <children>
       <TitledPane alignment="CENTER" animated="false" prefHeight="26.0" prefWidth="559.0" text="Booking" />
     <Button fx:id="buttonUpdateBooker" layoutX="308.0" layoutY="214.0" mnemonicParsing="false" onAction="#handleButtonUpdateBooking" prefHeight="30.0" prefWidth="164.0" text="Update Booking" />
@@ -14,10 +14,10 @@
       <Button fx:id="buttonCreateBooking" layoutX="308.0" layoutY="294.0" mnemonicParsing="false" onAction="#handleButtonCreateBooking" prefHeight="30.0" prefWidth="164.0" text="Create Booking" />
       <Button fx:id="buttonCancelBooking" layoutX="308.0" layoutY="256.0" mnemonicParsing="false" onAction="#handleButtonCancelBooking" prefHeight="30.0" prefWidth="164.0" text="Cancel Booking" />
       <Button fx:id="buttonExit" layoutX="308.0" layoutY="401.0" mnemonicParsing="false" onAction="#handleButtonExitAction" prefHeight="30.0" prefWidth="164.0" text="Exit" />
-      <DatePicker layoutX="103.0" layoutY="232.0" promptText="Check In Date" />
-      <DatePicker layoutX="103.0" layoutY="286.0" promptText="Check Out Date" />
-      <TextField layoutX="103.0" layoutY="52.0" promptText="Enter Booking ID" />
-      <TextField layoutX="103.0" layoutY="115.0" promptText="Enter Client ID" />
-      <TextField layoutX="103.0" layoutY="175.0" promptText="Enter Room ID" />
+      <DatePicker fx:id="dateCheckIn" layoutX="103.0" layoutY="232.0" promptText="Check In Date" />
+      <DatePicker fx:id="dateCheckOut" layoutX="103.0" layoutY="286.0" promptText="Check Out Date" />
+      <TextField fx:id="txtBookingId" layoutX="103.0" layoutY="52.0" promptText="Enter Booking ID" />
+      <TextField fx:id="txtClientId" layoutX="103.0" layoutY="115.0" promptText="Enter Client ID" />
+      <TextField fx:id="txtRoomId" layoutX="103.0" layoutY="175.0" promptText="Enter Room ID" />
    </children>
 </AnchorPane>
