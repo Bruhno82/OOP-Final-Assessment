@@ -73,6 +73,10 @@ public class CheckInController implements Initializable {
         // Check if booking exists
         for (Booking booking : bList) {
             if (bID.equals(booking.getBookingID())) {
+                if (booking.getCheckIn().isAfter(LocalDate.now())) {
+                    alarm("Booking date is after today.");
+                    return;
+                }
                 bookingTest = true;
                 // Get the roomID from the booking
                 String roomID = booking.getRoomID();
