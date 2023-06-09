@@ -4,10 +4,14 @@
  */
 package com.mycompany.cquassessment3hotelmanager;
 
+import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -35,7 +39,96 @@ public class CheckInController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        data = DataSingleton.getData();
+        bList = data.getBookingList();
+        cList = data.getClientList();
+        rList = data.getRoomList();
     }    
     
+    DataSingleton data;
+    
+    ArrayList<Booking> bList;
+    ArrayList<Client> cList;
+    ArrayList<StandardRoom> rList;
+    
+    @FXML
+    public void checkIn() throws IOException {
+        
+        
+        String bID;
+        String cID;
+        boolean bookingTest = false; 
+        Boolean clientTest = false;
+        
+        
+        // Check for blank fields
+        if (bookingField.getText().isBlank() || customerField.getText().isBlank()) {
+            alarm("All fields must be filled.");
+            return;
+        } else {
+            bID = bookingField.getText();
+            cID = customerField.getText();
+        }
+        
+        // Check if booking exists
+        for (Booking booking : bList) {
+            if (bID.equals(booking.getBookingID())) {
+                bookingTest = true;
+                // Get the roomID from the booking
+                String roomID = booking.getRoomID();
+                // Check if the room is occupied
+                for (StandardRoom room : rList) {
+                    if (room.getRoomID().equals(roomID) && room.getOccupied()) {
+                        alarm("Room is already occupied.");
+                        return;
+                    }
+                }
+                break;
+            }
+        }
+        
+        if (bookingTest == false) {
+            alarm("No booking exists.");
+            return;
+        }
+        
+        // Check if client exists
+        for(Client client: cList) {
+            if(cID.equals(client.getClientID())) {
+                clientTest = true;
+                break;
+            } 
+        }
+        
+        if (clientTest == false) {
+            alarm("No client exists.");
+            return;
+        }
+        
+        // Modify booking
+        if (bookingTest && clientTest) {
+            for (Booking booking : bList) {
+                if (bID.equals(booking.getBookingID())) {
+                    booking.setCheckIn(LocalDate.now());
+                }
+            
+                String rID = booking.getRoomID();
+                for (StandardRoom room : rList) {
+                    if (rID.equals(room.getRoomID())) {
+                        room.setOccupied(true);
+                    }
+                }
+                break;
+            }   
+        }
+    }
+    
+    
+    
+    // Provides alert functionality.
+    private void alarm(String message) {
+        Alert alert = new Alert(Alert.AlertType.WARNING,
+                message);
+        alert.showAndWait();
+    }
 }
