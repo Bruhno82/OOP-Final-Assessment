@@ -170,6 +170,13 @@ public class BookingScreenController implements Initializable {
     
     @FXML
     public void createClient() {
+        
+        // Check fields are filled
+        if (nameField.getText().isBlank() || emailField.getText().isBlank() || phoneField.getText().isBlank() || regoField.getText().isBlank()) {
+            alarm("All fields must be filled");
+            return;
+        }
+        
         int c = data.getClientCounter();
         cList.add(new Client("C" + c, nameField.getText(), emailField.getText(),
                 phoneField.getText(), regoField.getText()));
