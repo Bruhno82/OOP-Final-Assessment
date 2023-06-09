@@ -82,7 +82,7 @@ public class BookingScreenController implements Initializable {
         
         // Check customerID and roomID is not blank
         if (custIDField.getText().isBlank() || roomIDField.getText().isBlank()) {
-            alarm("ID fields ban not be blank.");
+            alarm("ID fields can not be blank.");
             return;
         }else {
             cID = custIDField.getText();
@@ -98,6 +98,13 @@ public class BookingScreenController implements Initializable {
         } else {
             start = LocalDate.parse(startDate.getValue().toString());
             end = LocalDate.parse(endDate.getValue().toString());
+        }
+        
+        // Check date is not before today
+        LocalDate today = LocalDate.now();
+        if (start.isBefore(today)) {
+            alarm("Start date can not be before today.");
+            return;
         }
 
         boolean clientTest = false;
