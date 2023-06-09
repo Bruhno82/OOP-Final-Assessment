@@ -73,12 +73,32 @@ public class BookingScreenController implements Initializable {
     public void createBooking() {
         int b = data.getBookingCounter();
         
-        String cID = custIDField.getText();
-        String rID = roomIDField.getText();
-        String pID = "";
-        LocalDate start = LocalDate.parse(startDate.getValue().toString());
-        LocalDate end = LocalDate.parse(endDate.getValue().toString());
-        double cost = 0.0;
+        String cID;
+        String rID;
+        String pID;
+        LocalDate start;
+        LocalDate end;
+        Double cost;
+        
+        // Check customerID and roomID is not blank
+        if (custIDField.getText().isBlank() || roomIDField.getText().isBlank()) {
+            alarm("ID fields ban not be blank.");
+            return;
+        }else {
+            cID = custIDField.getText();
+            rID = roomIDField.getText();
+            pID = "";
+            cost = 0.0;
+        }
+        
+        // Check dates are valid
+        if (startDate.getValue() == null || endDate.getValue() == null) {
+            alarm("Dates are not valid.");
+            return;
+        } else {
+            start = LocalDate.parse(startDate.getValue().toString());
+            end = LocalDate.parse(endDate.getValue().toString());
+        }
 
         boolean clientTest = false;
         boolean roomTest = false;
