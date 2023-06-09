@@ -43,7 +43,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="280.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<VBox prefHeight="280.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.cquassessment3hotelmanager.RoomServiceController">
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefWidth="295.0" VBox.vgrow="ALWAYS">
          <children>
@@ -61,9 +61,9 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <TextField GridPane.columnIndex="1" />
-                  <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <TextField fx:id="bookingField" GridPane.columnIndex="1" />
+                  <TextField fx:id="serviceField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextField fx:id="costField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                   <Label text="Booking ID:" GridPane.halignment="RIGHT">
                      <padding>
                         <Insets right="8.0" />
@@ -80,7 +80,7 @@
                      </GridPane.margin>
                   </Label>
                   <Button fx:id="exitBtn" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="60.0" text="Exit" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
-                  <Button mnemonicParsing="false" text="Add Service" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+                  <Button fx:id="addServiceBtn" mnemonicParsing="false" text="Add Service" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
                   <Label fx:id="confirmDisplay" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
                </children>
             </GridPane>
