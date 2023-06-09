@@ -75,10 +75,10 @@ public class BookingScreenController implements Initializable {
         
         String cID = custIDField.getText();
         String rID = roomIDField.getText();
-        String pID;
+        String pID = "";
         LocalDate start = LocalDate.parse(startDate.getValue().toString());
         LocalDate end = LocalDate.parse(endDate.getValue().toString());
-        double cost;
+        double cost = 0.0;
 
         boolean clientTest = false;
         boolean roomTest = false;
