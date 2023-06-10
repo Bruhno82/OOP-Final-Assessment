@@ -9,6 +9,7 @@ import java.util.ResourceBundle;
 import java.util.ArrayList;
 
 import java.time.LocalDate;
+import javafx.event.ActionEvent;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -18,6 +19,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 /**
  * FXML Controller class
  *
@@ -132,31 +134,45 @@ public class BookingScreenController implements Initializable {
                 break;
             }
         }
+        if(roomTest == false) {
+            alarm("Room could not be found.");
+        }
         // Testing if the booking will overlap with other bookings in the same room.
         if(roomTest == true) {
             for(Booking booking: bList) {
                 if(booking.getRoomID().equals(rID)) {
-                    if(booking.getCheckIn().compareTo(start) >= 0 && start.compareTo(booking.getCheckOut()) > 0 || // Start of stay can happen on final day of prior booking, but not before the end AND after its start
-                        booking.getCheckIn().compareTo(end) < 0 && end.compareTo(booking.getCheckOut()) >= 0 || // End of stay can happen on first day of another booking, but not after start date AND before end date
-                        booking.getCheckIn().compareTo(start) <= 0 && booking.getCheckOut().compareTo(end) >= 0) { // Start of stay cannot begin before a prior booking's start if end of stay occurs after prior booking's end
+                    if(booking.getCheckIn().compareTo(start) <= 0 && booking.getCheckOut().compareTo(start) > 0) { // Start of stay can happen on final day of prior booking, but not before the end AND after its start
                         bookingTest = false;
-                        alarm("Proposed dates conflict with existing booking " + booking.getBookingID() + ".");
+                        alarm("Start date conflicts with existing booking " + booking.getBookingID() + ".");
+                        break;
+                    }
+                    if(booking.getCheckIn().compareTo(end) < 0 && end.compareTo(booking.getCheckOut()) <= 0) {// End of stay can happen on first day of another booking, but not after start date AND before end date
+                        alarm("End date conflicts with existing booking " + booking.getBookingID() + ".");                      
+                        bookingTest = false;
+                        break;
+                    }
+                    if(booking.getCheckIn().compareTo(start) <= 0 && booking.getCheckOut().compareTo(end) >= 0) { // Start of stay cannot begin before a prior booking's start if end of stay occurs after prior booking's end
+                        bookingTest = false;
+                        alarm("Proposed dates overlap existing booking " + booking.getBookingID() + ".");
                         break;
                     }
                 }
             }
         }
+
         // Testing if dates are correct.
         if(end.compareTo(start) <= 0) {
             dateTest = false;
             alarm("End of stay cannot occur before beginning of stay.\n"
                     + "Booking cannot start and end on the same day.");
         }
+        else {
+            dateTest = true;
+        }
         // Create Booking.
-        if(clientTest || roomTest || bookingTest == false) {
+        if(clientTest == false || roomTest == false || bookingTest == false || dateTest == false) {
             alarm("Booking could not be created.");
         }
-        // if(clientTest || roomTest || bookingTest || dateTest == false)
         else {
             
             bList.add(new Booking("B" + b, custIDField.getText(),
@@ -195,5 +211,11 @@ public class BookingScreenController implements Initializable {
         Alert alert = new Alert(Alert.AlertType.WARNING,
                 message);
         alert.showAndWait();
+    }
+   
+    @FXML
+    private void exitButton(ActionEvent event) {
+        Stage thisStage = (Stage) exitBtn.getScene().getWindow();
+        thisStage.close();
     }
 }

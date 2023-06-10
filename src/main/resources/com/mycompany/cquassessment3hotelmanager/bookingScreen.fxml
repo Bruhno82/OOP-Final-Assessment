@@ -127,7 +127,7 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Button fx:id="exitBtn" mnemonicParsing="false" text="Exit" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
+                  <Button fx:id="exitBtn" mnemonicParsing="false" onAction="#exitButton" text="Exit" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
                   <Label fx:id="clientDisplay" prefHeight="17.0" prefWidth="72.0" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
                      <GridPane.margin>
                         <Insets right="8.0" />

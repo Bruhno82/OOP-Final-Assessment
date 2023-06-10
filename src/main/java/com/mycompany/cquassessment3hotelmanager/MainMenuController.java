@@ -4,23 +4,21 @@
  */
 package com.mycompany.cquassessment3hotelmanager;
 
-import com.mycompany.cquassessment3hotelmanager.Booking;
-import com.mycompany.cquassessment3hotelmanager.Carpark;
-import com.mycompany.cquassessment3hotelmanager.Client;
-import com.mycompany.cquassessment3hotelmanager.Service;
-import com.mycompany.cquassessment3hotelmanager.StandardRoom;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.ArrayList;
+import javafx.application.Platform;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Modality;
@@ -214,5 +212,17 @@ public class MainMenuController implements Initializable {
         checkOutStage.setScene(checkOutScene);
         checkOutStage.initModality(Modality.APPLICATION_MODAL);
         checkOutStage.show();
+    }
+  
+    // Exit functionality
+    @FXML
+    private void exitButton(){
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "This will close"
+                + " the Booking window. Are you sure?");
+        alert.showAndWait().ifPresent(response -> {
+            if(response == ButtonType.OK) {
+                Platform.exit();
+            }
+        });
     }
 }
