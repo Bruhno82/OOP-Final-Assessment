@@ -124,7 +124,7 @@ public class CheckOutController implements Initializable {
         }
         // Display invoice
         String invDisplay = String.format("Booking No: %s\nRoom No: %s\nCheck In date: %s\nCheck Out date: %s\nDaily Rate: %s\n"
-                + "Charges : %s\n Total %s"
+                + "Charges: $%s\nTotal $%s"
                 ,bID, rID, start, end, rate, charges, total);
         invoiceDisplay.setText(invDisplay);
         

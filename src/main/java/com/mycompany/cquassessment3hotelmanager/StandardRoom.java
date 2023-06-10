@@ -14,7 +14,7 @@ public class StandardRoom {
     private double dailyRate;
     private Boolean occupied;
     
-    public StandardRoom(String roomID, int beds, double DailyRate,
+    public StandardRoom(String roomID, int beds, double dailyRate,
             Boolean occupied) {
         this.roomID = roomID;
         this.beds = beds;

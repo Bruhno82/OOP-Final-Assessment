@@ -92,6 +92,6 @@ public class Booking {
 
     @Override
     public String toString() {
-        return "Booking{" + "bookingID=" + bookingID + ", clientID=" + clientID + ", roomID=" + roomID + ", parkID=" + parkID + ", checkIn=" + checkIn + ", checkOut=" + checkOut + ", charges=" + charges + '}';
-    }    
+        return "Booking Entry " + bookingID + ": Client: " + clientID + "; Room: " + roomID + "; Park: " + parkID + "; Begins " + checkIn + "; Ends: " + checkOut + "; Costs: $" + charges;
+    } 
 }

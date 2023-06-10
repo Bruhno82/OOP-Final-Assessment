@@ -36,6 +36,8 @@ public class MainMenuController implements Initializable {
     @FXML
     private TextField clientsField;
     @FXML
+    private TextField bookingsField;
+    @FXML
     private Button searchRoomsBtn;
     @FXML
     private Button searchClientsBtn;
@@ -100,9 +102,35 @@ public class MainMenuController implements Initializable {
                 displayArea.setText("No room could be found.");
             }
         }
-    }    
-    private void searchBookings() {
-        // This method should trigger a new scene with the Bookings information window. If it cannot be found, the display area indicates this with a message.
+    }  
+    @FXML
+    private void searchBookings() throws IOException {
+        String prompt = bookingsField.getText();
+        int index;
+        
+        DataSingleton data = DataSingleton.getData();
+        ArrayList<Booking> bList = data.getBookingList();
+        
+        for(Booking booking: bList) {
+            if(booking.getBookingID().equals(prompt) == false) {
+                displayArea.setText("No booking could be found.");
+            }
+            else {
+                index = bList.indexOf(booking);
+                
+                FXMLLoader displayBookingLoader = new FXMLLoader(this.getClass().getResource("DisplayBooking.fxml"));
+                Parent root = displayBookingLoader.load();
+
+                DisplayBookingController displayBooking = displayBookingLoader.getController();
+                displayBooking.setValues(index);
+                
+                Stage displayBookingStage = new Stage();
+                Scene displayBookingScene = new Scene(root);
+                displayBookingStage.setScene(displayBookingScene);
+                displayBookingStage.initModality(Modality.APPLICATION_MODAL);
+                displayBookingStage.show();
+            }
+        }
     }    
     @FXML
     private void searchParks() {
@@ -218,7 +246,7 @@ public class MainMenuController implements Initializable {
     @FXML
     private void exitButton(){
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "This will close"
-                + " the Booking window. Are you sure?");
+                + " the program. Are you sure?");
         alert.showAndWait().ifPresent(response -> {
             if(response == ButtonType.OK) {
                 Platform.exit();
