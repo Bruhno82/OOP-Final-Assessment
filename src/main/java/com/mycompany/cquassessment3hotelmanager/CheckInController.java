@@ -174,7 +174,7 @@ public class CheckInController implements Initializable {
                                 if (bID.equals(booking.getBookingID())) {
                                     booking.setCheckIn(LocalDate.now());
                                     room.setOccupied(true);
-                                    alarm("Check-in success.");
+                                    success("Check-in success.");
                                     // Close the window
                                     Stage currentStage = (Stage) exitBtn.getScene().getWindow();
                                     currentStage.close();
@@ -216,7 +216,12 @@ public class CheckInController implements Initializable {
         alert.showAndWait();
     }
 
-    private int showYesNoDialog(String message, String[] options) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    // Show success message
+    private void success(String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Success");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }
