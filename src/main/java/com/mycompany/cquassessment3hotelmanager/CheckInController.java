@@ -29,14 +29,44 @@ public class CheckInController implements Initializable {
 
     @FXML
     private TextField bookingField;
-    @FXML
-    private TextField customerField;
+
     @FXML
     private Button checkInBtn;
+
     @FXML
     private Label confirmDisplay;
+
+    @FXML
+    private TextField customerField;
+
+    @FXML
+    private Label customerLabel;
+
+    @FXML
+    private TextField dateField;
+
+    @FXML
+    private Label dateLabel;
+
     @FXML
     private Button exitBtn;
+
+    @FXML
+    private TextField roomField;
+
+    @FXML
+    private Label roomLabel;
+
+    @FXML
+    private Button searchBtn;
+    
+    String bID;
+    String cID = "";
+    String rID;
+    LocalDate date;
+    boolean bookingTest = false; 
+    Boolean roomTest = false;
+    
     /**
      * Initializes the controller class.
      */
@@ -46,6 +76,11 @@ public class CheckInController implements Initializable {
         bList = data.getBookingList();
         cList = data.getClientList();
         rList = data.getRoomList();
+        
+        // Hide fields
+        hideFields();
+        
+
     }    
     
     DataSingleton data;
@@ -54,80 +89,106 @@ public class CheckInController implements Initializable {
     ArrayList<Client> cList;
     ArrayList<StandardRoom> rList;
     
+    
+    public void hideFields() {
+        roomLabel.setVisible(false);
+        customerLabel.setVisible(false);
+        dateLabel.setVisible(false);
+        roomField.setVisible(false);
+        customerField.setVisible(false);
+        dateField.setVisible(false);
+        checkInBtn.setVisible(false);
+    }
+    
+    public void showFields() {
+        roomLabel.setVisible(true);
+        customerLabel.setVisible(true);
+        dateLabel.setVisible(true);
+        roomField.setVisible(true);
+        customerField.setVisible(true);
+        dateField.setVisible(true);
+        checkInBtn.setVisible(true);
+    }
+    
     @FXML
-    public void checkIn() throws IOException {
-        
-        
-        String bID;
-        String cID;
-        boolean bookingTest = false; 
-        Boolean clientTest = false;
-        
-        
+    public void searchBooking() throws IOException {
         // Check for blank fields
-        if (bookingField.getText().isBlank() || customerField.getText().isBlank()) {
-            alarm("All fields must be filled.");
+        if (bookingField.getText().isBlank()) {
+            alarm("Enter a booking ID.");
             return;
         } else {
             bID = bookingField.getText();
-            cID = customerField.getText();
-        }
-        
-        // Check if booking exists
-        for (Booking booking : bList) {
-            if (bID.equals(booking.getBookingID())) {
-                if (booking.getCheckIn().isAfter(LocalDate.now())) {
-                    alarm("Booking date is after today.");
-                    return;
-                }
-                bookingTest = true;
-                // Get the roomID from the booking
-                String roomID = booking.getRoomID();
-                // Check if the room is occupied
-                for (StandardRoom room : rList) {
-                    if (room.getRoomID().equals(roomID) && room.getOccupied()) {
-                        alarm("Room is already occupied.");
-                        return;
-                    }
-                }
-                break;
-            }
-        }
-        
-        if (bookingTest == false) {
-            alarm("No booking exists.");
-            return;
-        }
-        
-        // Check if client exists
-        for(Client client: cList) {
-            if(cID.equals(client.getClientID())) {
-                clientTest = true;
-                break;
-            } 
-        }
-        
-        if (clientTest == false) {
-            alarm("No client exists.");
-            return;
-        }
-        
-        // Modify booking
-        if (bookingTest && clientTest) {
+            boolean bookingFound = false; // Flag to indicate if a booking is found
+
+            // Check if booking exists
             for (Booking booking : bList) {
                 if (bID.equals(booking.getBookingID())) {
-                    booking.setCheckIn(LocalDate.now());
+                    // Get Client ID
+                    cID = booking.getClientID();
+                    // Get room ID
+                    rID = booking.getRoomID();
+                    // Get check-in date
+                    date = booking.getCheckIn();
+                    bookingFound = true;
+                    break; // Exit the loop once a booking is found
                 }
-            
-                String rID = booking.getRoomID();
+            }
+
+            if (bookingFound) {
+                // Fill fields
+                customerField.setText(cID);
+                roomField.setText(rID);
+                dateField.setText(date != null ? date.toString() : "");
+
+                // Display fields
+                showFields();
+            } else {
+                alarm("No booking found.");
+                // Hide fields
+                hideFields();
+            }
+        }
+    }
+    
+    @FXML
+    public void checkIn() throws IOException {
+        // Check for early check in
+        if (LocalDate.now().isBefore(date)) {
+            Alert confirmDialog = new Alert(Alert.AlertType.CONFIRMATION);
+            confirmDialog.setTitle("Confirmation");
+            confirmDialog.setHeaderText("Do you want to check this customer in early?");
+
+            // Show the confirmation dialog and wait for the user's response
+            Optional<ButtonType> result = confirmDialog.showAndWait();
+
+            // Check if the user clicked the OK button
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+                // Check if room is occupied
                 for (StandardRoom room : rList) {
                     if (rID.equals(room.getRoomID())) {
-                        room.setOccupied(true);
+                        if (room.getOccupied()) {
+                            alarm("This room is currently occupied.");
+                            return;
+                        } else {
+                            for (Booking booking : bList) {
+                                if (bID.equals(booking.getBookingID())) {
+                                    booking.setCheckIn(LocalDate.now());
+                                    room.setOccupied(true);
+                                    alarm("Check-in success.");
+                                    // Close the window
+                                    Stage currentStage = (Stage) exitBtn.getScene().getWindow();
+                                    currentStage.close();
+                                    return;
+                                }
+                            }
+                        }
                     }
                 }
-                break;
-            }   
+            }
         }
+
+        // Room not found
+        alarm("Room not found.");
     }
     
     @FXML
@@ -153,5 +214,9 @@ public class CheckInController implements Initializable {
         Alert alert = new Alert(Alert.AlertType.WARNING,
                 message);
         alert.showAndWait();
+    }
+
+    private int showYesNoDialog(String message, String[] options) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }
