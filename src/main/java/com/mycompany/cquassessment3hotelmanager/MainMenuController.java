@@ -88,6 +88,7 @@ public class MainMenuController implements Initializable {
 
 
     // Functionality for the various "Search" buttons
+    // Searches Room ArrayList
     @FXML
     private void searchRooms() {
         displayArea.setText("");
@@ -103,6 +104,23 @@ public class MainMenuController implements Initializable {
             }
         }
     }  
+    // Searchs Park ArrayList
+    @FXML
+    private void searchParks() {
+        displayArea.setText("");
+        String prompt = parksField.getText();
+        DataSingleton data = DataSingleton.getData();
+        for(Carpark park: data.getParkList()) {
+            if(park.getParkID().equals(prompt) == true) {
+                displayArea.setText(park.toString());
+                break;
+            }
+            else {
+                displayArea.setText("No park could be found.");
+            }
+        }        
+    } 
+    // Searches Bookings ArrayList
     @FXML
     private void searchBookings() throws IOException {
         String prompt = bookingsField.getText();
@@ -131,27 +149,41 @@ public class MainMenuController implements Initializable {
                 displayBookingStage.show();
             }
         }
-    }    
-    @FXML
-    private void searchParks() {
-        displayArea.setText("");
-        String prompt = parksField.getText();
+    } 
+    // Searchs Clients ArrayList
+    @FXML   
+    private void searchClients() throws IOException {
+        String prompt = clientsField.getText();
+        int index;
+        
         DataSingleton data = DataSingleton.getData();
-        for(Carpark park: data.getParkList()) {
-            if(park.getParkID().equals(prompt) == true) {
-                displayArea.setText(park.toString());
-                break;
+        ArrayList<Client> cList = data.getClientList();
+        
+        for(Client client: cList) {
+            if(client.getClientID().equals(prompt) == false) {
+                displayArea.setText("No booking could be found.");
             }
             else {
-                displayArea.setText("No park could be found.");
+                index = cList.indexOf(client);
+                
+                FXMLLoader displayClientLoader = new FXMLLoader(this.getClass().getResource("DisplayClient.fxml"));
+                Parent root = displayClientLoader.load();
+
+                DisplayClientController displayClient = displayClientLoader.getController();
+                displayClient.setValues(index);
+                
+                Stage displayClientStage = new Stage();
+                Scene displayClientScene = new Scene(root);
+                displayClientStage.setScene(displayClientScene);
+                displayClientStage.initModality(Modality.APPLICATION_MODAL);
+                displayClientStage.show();
             }
-        }        
-    }    
-    private void searchClients() {
-        // This method should trigger a new scene with the Client information window. If it cannot be found, the display area indicates this with a message.        
-    }    
-    private void searchInvoices() {
-        // This method should trigger a new scene with the Invoices information window. If it cannot be found, the display area indicates this with a message.        
+        }              
+    } 
+    // Searches Invoices ArrayList
+    private void searchInvoices() throws IOException {
+        // This method should trigger a new scene with the Invoices information window. If it cannot be found, the display area indicates this with a message. 
+        // Leave alone until Nathaniel has finished his class
     }
     
     
@@ -241,10 +273,15 @@ public class MainMenuController implements Initializable {
         checkOutStage.initModality(Modality.APPLICATION_MODAL);
         checkOutStage.show();
     }
+    
+    @FXML
+    private void saveButton() {
+        
+    }
   
     // Exit functionality
     @FXML
-    private void exitButton(){
+    private void exitButton() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "This will close"
                 + " the program. Are you sure?");
         alert.showAndWait().ifPresent(response -> {
