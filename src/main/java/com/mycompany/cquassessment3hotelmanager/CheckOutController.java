@@ -4,15 +4,23 @@
  */
 package com.mycompany.cquassessment3hotelmanager;
 
+import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 /**
  * FXML Controller class
  *
@@ -38,7 +46,118 @@ public class CheckOutController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        data = DataSingleton.getData();
+        bList = data.getBookingList();
+        cList = data.getClientList();
+        rList = data.getRoomList();
     }    
     
+    DataSingleton data;
+    
+    ArrayList<Booking> bList;
+    ArrayList<Client> cList;
+    ArrayList<StandardRoom> rList;
+    
+    @FXML
+    public void checkOut() throws IOException {
+        String bID = null;
+        String cID = null;
+        String rID = null;
+        double rate = 0.0;
+        double totalRate;
+        int days = 0;
+        double charges = 0.0;
+        double total = 0.0;
+        LocalDate start = null;
+        LocalDate end = LocalDate.now();
+
+        // Check for blank entry
+        if (bookingField.getText().isBlank()) {
+            alarm("Booking ID can not be blank.");
+            return;
+        } else {
+            bID = bookingField.getText();
+            for (Booking booking : bList) {
+                if (bID.equals(booking.getBookingID())) {
+                    cID = booking.getClientID();
+                    rID = booking.getRoomID();
+                    charges = booking.getCharges();
+                    start = booking.getCheckIn();
+                    break;
+                }
+            }
+        }
+
+        // Check if booking was found
+        if (cID == null) {
+            alarm("No booking found.");
+            return;
+        }
+
+        // Display client ID
+        clientField.setText(cID);
+
+        // Work out cost of stay 
+       
+        // Calculate days
+        days = (int) ChronoUnit.DAYS.between(start, end);
+            
+        // Get room rate
+        for (StandardRoom room : rList) {
+            if (rID.equals(room.getRoomID())) {
+                rate = room.getDailyRate();
+            }  
+        }
+        
+            
+        // Calculate total
+        totalRate = rate * days;
+        
+        // Add services
+        total = totalRate + charges;
+        // Change booking
+        for (Booking booking : bList) {
+            if (bID.equals(booking.getBookingID())) {
+                booking.setCheckOut(end);
+                booking.setCharges(total);
+            }
+        }
+        // Display invoice
+        String invDisplay = String.format("Booking No: %s\nRoom No: %s\nCheck In date: %s\nCheck Out date: %s\nDaily Rate: %s\n"
+                + "Charges : %s\n Total %s"
+                ,bID, rID, start, end, rate, charges, total);
+        invoiceDisplay.setText(invDisplay);
+        
+        // Set room as unoccupied
+        for (StandardRoom room : rList) {
+            if (rID.equals(room.getRoomID())) {
+                room.setOccupied(false);
+            }
+        }
+    }
+    
+    @FXML
+    private void handleExit() {
+        // Create a confirmation dialog
+        Alert confirmDialog = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmDialog.setTitle("Confirmation");
+        confirmDialog.setHeaderText("Are you sure you want to exit?");
+
+        // Show the confirmation dialog and wait for the user's response
+        Optional<ButtonType> result = confirmDialog.showAndWait();
+
+        // Check if the user clicked the OK button
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            // User confirmed the exit, close the current window
+            Stage currentStage = (Stage) exitBtn.getScene().getWindow();
+            currentStage.close();
+        }
+    }
+    
+    // Provides alert functionality.
+    private void alarm(String message) {
+        Alert alert = new Alert(Alert.AlertType.WARNING,
+                message);
+        alert.showAndWait();
+    }
 }
