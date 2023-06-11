@@ -45,23 +45,15 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="350.0" prefWidth="541.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.cquassessment3hotelmanager.DisplayBookingController">
+<VBox prefHeight="325.0" prefWidth="575.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.cquassessment3hotelmanager.DisplayClientController">
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
          <children>
-            <TextArea fx:id="displayArea" layoutX="14.0" layoutY="34.0" prefHeight="300.0" prefWidth="290.0" />
-            <Label layoutX="14.0" layoutY="4.0" prefHeight="35.0" prefWidth="140.0" text="Displaying Booking">
-               <font>
-                  <Font size="16.0" />
-               </font>
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-            </Label>
-            <GridPane layoutX="334.0" layoutY="34.0" prefHeight="300.0" prefWidth="200.0">
+            <GridPane layoutX="221.0" layoutY="27.0" prefHeight="290.0" prefWidth="340.0">
               <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="89.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -70,40 +62,48 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <TextField fx:id="clientField" GridPane.columnIndex="1" />
-                  <TextField fx:id="roomField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextField fx:id="cIDField" prefWidth="129.0" GridPane.columnIndex="1" />
+                  <TextField fx:id="rIDField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <Label text="Client ID:" GridPane.halignment="RIGHT">
-                     <padding>
-                        <Insets right="8.0" />
-                     </padding>
+                     <GridPane.margin>
+                        <Insets right="10.0" />
+                     </GridPane.margin>
                   </Label>
                   <Label text="Room ID:" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
                      <GridPane.margin>
-                        <Insets right="8.0" />
+                        <Insets right="10.0" />
                      </GridPane.margin>
                   </Label>
-                  <DatePicker fx:id="startField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <DatePicker fx:id="endField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                   <Label text="Start Date:" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
                      <GridPane.margin>
-                        <Insets right="8.0" />
+                        <Insets right="10.0" />
                      </GridPane.margin>
                   </Label>
                   <Label text="End Date:" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
                      <GridPane.margin>
-                        <Insets right="8.0" />
+                        <Insets right="10.0" />
                      </GridPane.margin>
                   </Label>
-                  <Button fx:id="updateBtn" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="60.0" text="Update" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
-                  <Button fx:id="exitBtn" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="60.0" text="Exit" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
-                  <Button fx:id="cancelBtn" mnemonicParsing="false" text="Cancel Booking" GridPane.halignment="RIGHT" GridPane.rowIndex="6" />
-                  <Label fx:id="confirmDisplay" prefHeight="17.0" prefWidth="107.0" GridPane.rowIndex="4" />
+                  <Button fx:id="exitBtn" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="90.0" text="Exit" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
+                  <Button fx:id="deleteBtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Cancel Booking" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
+                  <Label fx:id="confirmDisplay" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
+                  <Button fx:id="updateCIDBtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Update CID" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
+                  <Button fx:id="updateRIDBtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Update RID" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                  <Button fx:id="updatePhoneBtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Update Phone" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+                  <Button fx:id="updateRegoBtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Update Rego" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+                  <DatePicker fx:id="startDate" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <DatePicker fx:id="endDate" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                </children>
             </GridPane>
-            <Label layoutX="377.0" layoutY="9.0" text="Update Booking">
+            <Label layoutX="25.0" layoutY="2.0" prefHeight="25.0" prefWidth="178.0" text="Displaying Booking B000">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <TextArea fx:id="displayArea" layoutX="14.0" layoutY="39.0" prefHeight="268.0" prefWidth="200.0" />
+            <Label layoutX="333.0" layoutY="2.0" prefHeight="25.0" prefWidth="117.0" text="Update Booking">
                <font>
                   <Font size="16.0" />
                </font>
