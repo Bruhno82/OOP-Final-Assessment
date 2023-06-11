@@ -15,7 +15,7 @@ public class Invoice {
     private LocalDate date;
     private Boolean paid;
     
-    public Invoice (String invoiceNo, Boolean paid, LocalDate date) {
+    public Invoice (String invoiceNo, LocalDate date, Boolean paid) {
         this.invoiceNo = invoiceNo;
         this.paid = paid;
         this.date = LocalDate.now();
