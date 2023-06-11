@@ -276,6 +276,20 @@ public class MainMenuController implements Initializable {
     }
     
     @FXML
+    private void roomServiceWindow() throws IOException {
+        FXMLLoader roomServiceLoader = new FXMLLoader(this.getClass().getResource("RoomService.fxml"));
+        Parent root = roomServiceLoader.load();
+        
+        RoomServiceController roomServiceController = roomServiceLoader.getController();
+
+        Stage checkOutStage = new Stage();
+        Scene checkOutScene = new Scene(root);
+        checkOutStage.setScene(checkOutScene);
+        checkOutStage.initModality(Modality.APPLICATION_MODAL);
+        checkOutStage.show();
+    }
+    
+    @FXML
     private void saveButton() throws IOException {
         SaveRecords saveRecords = new SaveRecords(bList, rList, cList, sList, pList, iList);
         saveRecords.saveAll();

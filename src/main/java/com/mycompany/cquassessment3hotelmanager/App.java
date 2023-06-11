@@ -19,6 +19,10 @@ public class App extends Application {
         LoadRecords load = new LoadRecords();
         load.loadCarparkArrayList();
         load.loadRoomArrayList();
+        load.loadBookingArrayList();
+        load.loadClientArrayList();
+        load.loadServiceArrayList();
+        load.loadInvoiceArrayList();
         scene = new Scene(loadFXML("MainMenu"), 845, 390);
         stage.setScene(scene);
         stage.show();
