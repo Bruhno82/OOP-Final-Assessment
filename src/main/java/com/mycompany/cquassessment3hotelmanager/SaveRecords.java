@@ -108,7 +108,7 @@ public class SaveRecords {
             StringBuilder sb = new StringBuilder();
 
             for (Service service : sList) {
-                sb.append(service.getRoomID()).append(",")
+                sb.append(service.getBookingID()).append(",")
                         .append(service.getServiceType()).append(",")
                         .append(service.getCost()).append("\n");
             }

@@ -87,12 +87,7 @@ public class MainMenuController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        bList.addAll(data.getBookingList());
-        rList.addAll(data.getRoomList());
-        cList.addAll(data.getClientList());
-        sList.addAll(data.getServiceList());
-        pList.addAll(data.getParkList());
-        iList.addAll(data.getInvoiceList());
+
     }  
 
 
@@ -267,6 +262,20 @@ public class MainMenuController implements Initializable {
         Parent root = checkOutLoader.load();
         
         CheckOutController checkOutController = checkOutLoader.getController();
+
+        Stage checkOutStage = new Stage();
+        Scene checkOutScene = new Scene(root);
+        checkOutStage.setScene(checkOutScene);
+        checkOutStage.initModality(Modality.APPLICATION_MODAL);
+        checkOutStage.show();
+    }
+    
+    @FXML
+    private void roomServiceWindow() throws IOException {
+        FXMLLoader roomServiceLoader = new FXMLLoader(this.getClass().getResource("RoomService.fxml"));
+        Parent root = roomServiceLoader.load();
+        
+        RoomServiceController roomServiceController = roomServiceLoader.getController();
 
         Stage checkOutStage = new Stage();
         Scene checkOutScene = new Scene(root);
