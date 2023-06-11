@@ -89,9 +89,9 @@ public class Booking {
         return bookingID + "," + clientID + "," + roomID + "," + parkID + "," +
                 checkIn + "," + checkOut + "," + charges + ",";
     }
-
+    
     @Override
     public String toString() {
-        return "Booking Entry " + bookingID + ": Client: " + clientID + "; Room: " + roomID + "; Park: " + parkID + "; Begins " + checkIn + "; Ends: " + checkOut + "; Costs: $" + charges;
+        return "Booking Number: " + bookingID + ", Client ID: " + clientID + ", Room No: " + roomID + ", Carpark: " + parkID + "\nBegins " + checkIn + ", Ends: " + checkOut + ", Costs: $" + charges +"\n";
     } 
 }

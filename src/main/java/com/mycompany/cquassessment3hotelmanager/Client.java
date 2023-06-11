@@ -31,10 +31,10 @@ public class Client {
     
     // Client Name Getter and Setter
     public String getClientName() {
-        return phoneNo;
+        return clientName;
     }
     public void setClientName(String phoneNo) {
-        this.phoneNo = phoneNo;
+        this.clientName = phoneNo;
     }
     
     // Phone Number Getter and Setter
@@ -69,6 +69,6 @@ public class Client {
     
     @Override
     public String toString() {
-        return "client{" + "clientID=" + clientID + ", clientName=" + clientName + ", phoneNo=" + phoneNo + ", email=" + email + ", regoNo=" + regoNo + '}';
+        return "Client ID: " + clientID + ", Client Name: " + clientName + "\nPhone No: " + phoneNo + ", Email: " + email + ", Rego No: " + regoNo + "\n";
     }  
 }

@@ -58,6 +58,6 @@ public class StandardRoom {
     
     @Override
     public String toString() {
-        return "StandardRoom{" + "roomID=" + roomID + ", beds=" + beds + ", dailyRate=" + dailyRate + ", occupied=" + occupied + '}';
+        return "Room Nubmer: " + roomID + ", Beds: " + beds + "\nDaily Rate: $" + dailyRate + ", Occupied: " + occupied + "\n";
     }
 }
