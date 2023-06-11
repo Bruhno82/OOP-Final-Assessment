@@ -217,11 +217,13 @@ public class LoadRecords {
 
                 // Parse and extract other relevant invoice information from the line
                 String invoiceNo = invoiceData[0];
-                LocalDate date = LocalDate.parse(invoiceData[1]);
-                Boolean paid = Boolean.parseBoolean(invoiceData[2]);
+                String clientID = invoiceData[1];
+                double price = Double.parseDouble(invoiceData[2]);
+                LocalDate date = LocalDate.parse(invoiceData[3]);
+                Boolean paid = Boolean.parseBoolean(invoiceData[4]);
                 
                 // Create a new Invoice object using the data fields
-                Invoice invoice = new Invoice(invoiceNo, date, paid);
+                Invoice invoice = new Invoice(invoiceNo, clientID, price, date, paid);
 
                 // Add the Invoice object to the iList ArrayList
                 iList.add(invoice);

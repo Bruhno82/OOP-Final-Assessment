@@ -9,6 +9,8 @@ import java.util.ResourceBundle;
 import java.util.ArrayList;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.util.Optional;
 import javafx.event.ActionEvent;
 
 import javafx.fxml.FXML;
@@ -16,6 +18,7 @@ import javafx.fxml.Initializable;
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -125,72 +128,64 @@ public class BookingScreenController implements Initializable {
         // Displays alert if client ID cannot be found. This wouldn't work in an Else statement for some reason.
         if (clientTest == false) {
             alarm("Client could not be found.");
+            return;
         }
         // Testing if room exists.
         for(StandardRoom room: rList) {
             if(rID.equals(room.getRoomID())) {
                 roomTest = true;
                 pID = "P" + rList.indexOf(room);
-                cost = room.getDailyRate() * end.compareTo(start);
+                cost = room.getDailyRate() * ChronoUnit.DAYS.between(start, end);
                 break;
             }
         }
         if(roomTest == false) {
             alarm("Room could not be found.");
+            return;
         }
         // Testing if the booking will overlap with other bookings in the same room.
-        if(roomTest == true) {
-            for(Booking booking: bList) {
-                if(booking.getRoomID().equals(rID)) {
-                    if(booking.getCheckIn().compareTo(start) <= 0 && booking.getCheckOut().compareTo(start) > 0) { // Start of stay can happen on final day of prior booking, but not before the end AND after its start
-                        bookingTest = false;
-                        alarm("Start date conflicts with existing booking " + booking.getBookingID() + ".");
-                        break;
-                    }
-                    if(booking.getCheckIn().compareTo(end) < 0 && end.compareTo(booking.getCheckOut()) <= 0) {// End of stay can happen on first day of another booking, but not after start date AND before end date
-                        alarm("End date conflicts with existing booking " + booking.getBookingID() + ".");                      
-                        bookingTest = false;
-                        break;
-                    }
-                    if(booking.getCheckIn().compareTo(start) <= 0 && booking.getCheckOut().compareTo(end) >= 0) { // Start of stay cannot begin before a prior booking's start if end of stay occurs after prior booking's end
-                        bookingTest = false;
-                        alarm("Proposed dates overlap existing booking " + booking.getBookingID() + ".");
-                        break;
-                    }
+        for(Booking booking: bList) {          
+            if(booking.getRoomID().equals(rID)) {
+
+                if(ChronoUnit.DAYS.between(booking.getCheckIn(), start) >= 0 && ChronoUnit.DAYS.between(booking.getCheckOut(), start) < 0) { // Start of stay can happen on final day of prior booking, but not before the end AND after its start
+                    alarm("Start date conflicts with existing booking " + booking.getBookingID() + ".");
+                    return;
+                }
+                if(ChronoUnit.DAYS.between(booking.getCheckIn(), end) > 0 && ChronoUnit.DAYS.between(booking.getCheckOut(), end) <= 0) {// End of stay can happen on first day of another booking, but not after start date AND before end date
+                    alarm("End date conflicts with existing booking " + booking.getBookingID() + ".");                      
+                    return;
+                }
+                if(ChronoUnit.DAYS.between(start, booking.getCheckIn()) > 0 && ChronoUnit.DAYS.between(end, booking.getCheckOut()) < 0) { // Start of stay cannot begin before a prior booking's start if end of stay occurs after prior booking's end
+                    alarm("Proposed dates overlap existing booking " + booking.getBookingID() + ".");
+                    return;
                 }
             }
         }
 
         // Testing if dates are correct.
-        if(end.compareTo(start) <= 0) {
-            dateTest = false;
+        if(end.isBefore(start)) {
             alarm("End of stay cannot occur before beginning of stay.\n"
                     + "Booking cannot start and end on the same day.");
+            return;
         }
-        else {
-            dateTest = true;
-        }
-        // Create Booking.
-        if(clientTest == false || roomTest == false || bookingTest == false || dateTest == false) {
-            alarm("Booking could not be created.");
-        }
-        else {
-            
-            bList.add(new Booking("B" + b, custIDField.getText(),
-            roomIDField.getText(), pID, start, end, cost));
+        // Since return has not been called, create Booking.            
+        bList.add(new Booking("B" + b, custIDField.getText(),
+        roomIDField.getText(), pID, start, end, cost));
 
-            bookingDisplay.setText("Room " + rID + " booked. (ID:B" + b + ")");            
-            data.setBookingCounter(b + 1);
-            data.setBookingList(bList);
+        bookingDisplay.setText("Room " + rID + " booked. (ID:B" + b + ")");            
+        data.setBookingCounter(b + 1);
+        data.setBookingList(bList);
         }
-    }
     
     @FXML
     public void createClient() {
         
         // Check fields are filled
-        if (nameField.getText().isBlank() || emailField.getText().isBlank() || phoneField.getText().isBlank() || regoField.getText().isBlank()) {
-            alarm("All fields must be filled");
+        if (nameField.getText().isBlank() || nameField.getText().contains(",") || 
+                emailField.getText().isBlank() || emailField.getText().contains(",") ||
+                phoneField.getText().isBlank() || phoneField.getText().contains(",") ||
+                regoField.getText().isBlank() || regoField.getText().contains(",")) {
+            alarm("All fields must be filled.\nNo fields can contain commas.");
             return;
         }
         
@@ -215,8 +210,19 @@ public class BookingScreenController implements Initializable {
     }
    
     @FXML
-    private void exitButton(ActionEvent event) {
-        Stage thisStage = (Stage) exitBtn.getScene().getWindow();
-        thisStage.close();
+    private void exitButton() {
+        Alert confirmDialog = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmDialog.setTitle("Confirmation");
+        confirmDialog.setHeaderText("Are you sure you want to close this window?");
+
+        // Show the confirmation dialog and wait for the user's response
+        Optional<ButtonType> result = confirmDialog.showAndWait();
+
+        // Check if the user clicked the OK button
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            // User confirmed the exit, close the current window
+            Stage currentStage = (Stage) exitBtn.getScene().getWindow();
+            currentStage.close();        
+        }
     }
 }

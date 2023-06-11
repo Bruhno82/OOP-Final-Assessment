@@ -102,7 +102,7 @@
                   <Font size="16.0" />
                </font>
             </Label>
-            <TextArea fx:id="displayArea" layoutX="14.0" layoutY="39.0" prefHeight="268.0" prefWidth="200.0" wrapText="true" />
+            <TextArea fx:id="displayArea" layoutX="14.0" layoutY="39.0" prefHeight="270.0" prefWidth="200.0" wrapText="true" />
             <Label layoutX="333.0" layoutY="2.0" prefHeight="25.0" prefWidth="117.0" text="Update Booking">
                <font>
                   <Font size="16.0" />

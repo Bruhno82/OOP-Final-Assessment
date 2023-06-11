@@ -12,11 +12,15 @@ import java.time.LocalDate;
  */
 public class Invoice {
     private String invoiceNo;
+    private String clientID;
+    private double price;
     private LocalDate date;
     private Boolean paid;
     
-    public Invoice (String invoiceNo, LocalDate date, Boolean paid) {
+    public Invoice (String invoiceNo, String clientID, double price, LocalDate date, Boolean paid) {
         this.invoiceNo = invoiceNo;
+        this.clientID = clientID;
+        this.price = price;
         this.paid = paid;
         this.date = LocalDate.now();
     }
@@ -24,6 +28,22 @@ public class Invoice {
     // InvoiceNo Getter and Setter
     public String getInvoiceNo() {
         return invoiceNo;
+    }
+    
+    // ClientID Getter and Setter
+    public String getClientID() {
+        return clientID;
+    }
+    public void setClientID(String clientID) {
+        this.clientID = clientID;
+    }
+    
+    // Price Getter and Setter
+    public double getPrice() {
+        return price;
+    }
+    public void setPrice(double price) {
+        this.price = price;
     }
 
     // Date Getter and Setter
@@ -49,6 +69,6 @@ public class Invoice {
     
     @Override
     public String toString() {
-        return "Invoice{" + "invoiceNo=" + invoiceNo + ", date=" + date + ", paid=" + paid + '}';
+        return "Invoice Number: " + invoiceNo + ", Billed to: " + clientID + ", Date Issued: " + date + "\nTotal Amount: $" + price + ", Paid: " + paid + "\n";
     }
 }

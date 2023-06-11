@@ -96,55 +96,62 @@ public class MainMenuController implements Initializable {
     @FXML
     private void searchRooms() {
         String prompt = roomsField.getText();
+        boolean test = false;
         for(StandardRoom room: data.getRoomList()) {
             if(room.getRoomID().equals(prompt) == true) {
-                displayArea.setText(room.toString());
-                break;
+                displayArea.appendText("SEARCH RESULTS:\n" + room.toString());
+                roomsField.setText("");
+                return;
             }
             else {
-                displayArea.setText("No room could be found.\n");
+                test = true;
             }
+        }
+        if(test == true) {
+            displayArea.appendText("No room could be found.\n");
         }
     }  
     // Searchs Park ArrayList
     @FXML
     private void searchParks() {
         String prompt = parksField.getText();
+        boolean test = false;
+        
         for(Carpark park: data.getParkList()) {
             if(park.getParkID().equals(prompt) == true) {
-                displayArea.setText(park.toString());
-                break;
+                displayArea.appendText("SEARCH RESULTS:\n" + park.toString());
+                parksField.setText("");
+                return;
             }
             else {
-                displayArea.appendText("No park could be found.\n");
+                test = true;
             }
-        }        
+        }
+        if(test == true) {
+            displayArea.appendText("No park could be found.\n");
+        }
     } 
     // Searches Bookings ArrayList
     @FXML
     private void searchBookings() throws IOException {
         String prompt = bookingsField.getText();
         boolean test = false;
-        int index;
-        
-        ArrayList<Booking> bList = data.getBookingList();
-        
+ 
         for(Booking booking: bList) {
-            if(booking.getBookingID().equals(prompt)) {
-                index = bList.indexOf(booking);
-                
+            if(booking.getBookingID().equals(prompt)) {                
                 FXMLLoader displayBookingLoader = new FXMLLoader(this.getClass().getResource("DisplayBooking.fxml"));
                 Parent root = displayBookingLoader.load();
 
                 DisplayBookingController displayBooking = displayBookingLoader.getController();
-                displayBooking.setValues(index);
+                displayBooking.setValues(booking);
                 
                 Stage displayBookingStage = new Stage();
                 Scene displayBookingScene = new Scene(root);
                 displayBookingStage.setScene(displayBookingScene);
                 displayBookingStage.initModality(Modality.APPLICATION_MODAL);
                 displayBookingStage.show();
-                displayArea.setText("Booking " + booking.getBookingID() + " opened in new window.");
+                bookingsField.setText("");
+                displayArea.appendText("SEARCH RESULTS:\nBooking " + booking.getBookingID() + " opened in new window.");
                 return;
             }
             else {
@@ -161,12 +168,10 @@ public class MainMenuController implements Initializable {
         String prompt = clientsField.getText();
         Boolean test = false;
         
-        ArrayList<Client> cList = data.getClientList();
-        
         for(Client client: cList) {
             if(client.getClientID().equals(prompt)) {
                 clientsField.setText("");
-                displayArea.appendText("Client " + client.getClientID() + " displayed in new window.\n");                
+                displayArea.appendText("SEARCH RESULTS:\nClient " + client.getClientID() + " displayed in new window.\n");                
                 
                 FXMLLoader displayClientLoader = new FXMLLoader(this.getClass().getResource("DisplayClient.fxml"));
                 Parent root = displayClientLoader.load();
@@ -192,44 +197,73 @@ public class MainMenuController implements Initializable {
         }
     } 
     // Searches Invoices ArrayList
+    @FXML
     private void searchInvoices() throws IOException {
-        // This method should trigger a new scene with the Invoices information window. If it cannot be found, the display area indicates this with a message. 
-        // Leave alone until Nathaniel has finished his class
+        String prompt = invoicesField.getText();
+        Boolean test = false;
+        
+        for(Invoice invoice: iList) {
+            if(invoice.getInvoiceNo().equals(prompt)) {
+                invoicesField.setText("");
+                displayArea.appendText("SEARCH RESULTS:\nInvoice " + invoice.getInvoiceNo() + " displayed in new window.\n");                
+                
+                FXMLLoader displayInvoiceLoader = new FXMLLoader(this.getClass().getResource("DisplayInvoice.fxml"));
+                Parent root = displayInvoiceLoader.load();
+
+                DisplayInvoiceController displayInvoice = displayInvoiceLoader.getController();
+                displayInvoice.setValues(invoice);
+                
+                Stage displayInvoiceStage = new Stage();
+                Scene displayInvoiceScene = new Scene(root);
+                displayInvoiceStage.setScene(displayInvoiceScene);
+                displayInvoiceStage.initModality(Modality.APPLICATION_MODAL);
+                displayInvoiceStage.show();
+                
+                return;
+                
+            }
+            else {
+                test = true;
+            }
+        }
+        if(test == true) {
+            displayArea.appendText("No client could be found.\n");
+        }
     }
     
     
     // Functionality for the various "Show All" buttons
     @FXML
     private void showRooms() {
-        displayArea.appendText("Displaying all Rooms:\n");
+        displayArea.appendText("DISPLAYING ALL ROOMS:\n");
         for(StandardRoom room: rList) {
             displayArea.appendText(room.toString() + "\n");
         }
     }
     @FXML
     private void showBookings() {
-        displayArea.appendText("Displaying all Bookings:\n");
+        displayArea.appendText("DISPLAYING ALL BOOKINGS:\n");
         for(Booking booking: bList) {
             displayArea.appendText(booking.toString() + "\n");
         }
     }
     @FXML 
     private void showParks() {
-        displayArea.appendText("Displaying all Parks:\n");
+        displayArea.appendText("DISPLAYING ALL PARKS:\n");
         for(Carpark park: pList) {
             displayArea.appendText(park.toString() + "\n");
         }        
     }
     @FXML
     private void showClients() {
-        displayArea.appendText("Displaying all Clients:\n");
+        displayArea.appendText("DISPLAYING ALL CLIENTS:\n");
         for(Client client: cList) {
             displayArea.appendText(client.toString() + "\n");
         }
     }
     @FXML
     private void showInvoices() {
-        displayArea.appendText("Displaying all Invoices:\n");
+        displayArea.appendText("DISPLAYING ALL INVOICES:\n");
         for(Invoice invoice: iList) {
             displayArea.appendText(invoice.toString() + "\n");
         }

@@ -84,7 +84,7 @@
                         <Insets />
                      </GridPane.margin>
                   </Button>
-                  <Button fx:id="searchInvoiceBtn" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="104.0" text="Search Invoices" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                  <Button fx:id="searchInvoiceBtn" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#searchInvoices" prefHeight="25.0" prefWidth="104.0" text="Search Invoices" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                      <GridPane.margin>
                         <Insets />
                      </GridPane.margin>

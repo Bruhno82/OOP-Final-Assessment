@@ -6,6 +6,8 @@ package com.mycompany.cquassessment3hotelmanager;
 
 import java.net.URL;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+
 import java.util.ResourceBundle;
 import java.util.ArrayList;
 import java.util.Optional;
@@ -69,13 +71,11 @@ public class DisplayBookingController implements Initializable {
     ArrayList<Booking> bList;
     ArrayList<Client> cList;
     Booking displayedBooking;
-    int index;
     DataSingleton data;
     
     // Sets values
-    public void setValues(int index) {
-        this.index = index;
-        displayedBooking = bList.get(index);
+    public void setValues(Booking displayedBooking) {
+        this.displayedBooking = displayedBooking;
         this.displayArea.setText(displayedBooking.toString());
         this.title.setText("Displaying Booking " + displayedBooking.getBookingID());
     }
@@ -113,7 +113,6 @@ public class DisplayBookingController implements Initializable {
         String rID;
         double dailyRate = 0.0;
         Boolean roomTest = false;
-        Boolean bookingTest = true;
         if (roomField.getText().isBlank()) {
             alarm("Room field can not be blank.");
             return;
@@ -129,33 +128,41 @@ public class DisplayBookingController implements Initializable {
                 break;
             } 
         }       
+        // Alarm if test is false. Can't put it in the loop without it repeatedly going off or misfiring.
         if(roomTest == false) {
-            alarm("No matching room could be found.");            
+            alarm("No matching room could be found.");
+            return;
         }
+        
         // Checking that updated booking won't conflict with other bookings.
         if(roomTest == true) {
             for(Booking booking: bList) {
                 if(booking.getBookingID().equals(displayedBooking.getBookingID()) == false) {
-                    if(booking.getCheckIn().compareTo(displayedBooking.getCheckIn()) <= 0 && booking.getCheckOut().compareTo(displayedBooking.getCheckIn()) > 0 ||
-                            booking.getCheckIn().compareTo(displayedBooking.getCheckOut()) < 0 && displayedBooking.getCheckOut().compareTo(booking.getCheckOut()) <= 0 ||
-                            booking.getCheckIn().compareTo(displayedBooking.getCheckIn()) <= 0 && booking.getCheckOut().compareTo(displayedBooking.getCheckOut()) >= 0) {
-                        bookingTest = false;
-                        alarm("Room assignment conflicts with existing booking " + booking.getBookingID() + ".");
-                        break;
+                    if(booking.getRoomID().equals(displayedBooking.getRoomID())) {
+                        LocalDate displayedStart = displayedBooking.getCheckIn();
+                        LocalDate displayedEnd = displayedBooking.getCheckOut();
+                        LocalDate bookedStart = booking.getCheckIn();
+                        LocalDate bookedEnd = booking.getCheckOut();
+                    
+                        // Check to make sure the booking doesn't conflict with an existing booking. Explanation of code is in BookingScreenController.
+                        if(ChronoUnit.DAYS.between(bookedStart, displayedStart) >= 0 && ChronoUnit.DAYS.between(displayedStart, bookedEnd) < 0  ||
+                                ChronoUnit.DAYS.between(bookedStart, displayedEnd) > 0 && ChronoUnit.DAYS.between(bookedEnd, displayedEnd) <= 0 ||
+                                ChronoUnit.DAYS.between(displayedStart, bookedStart) > 0 && ChronoUnit.DAYS.between(displayedEnd, bookedEnd) < 0) {
+                            alarm("Room assignment conflicts with existing booking " + booking.getBookingID() + ".");
+                            return;
+                        }
                     }
                 }
             }
         }
-        if(roomTest == false || bookingTest == false) {
-            alarm("Room ID could not be updated.");
-        }
-        else {
-            displayedBooking.setRoomID(rID);
-            displayedBooking.setCharges(dailyRate * displayedBooking.getCheckOut().compareTo(displayedBooking.getCheckIn()));
-            displayArea.setText(displayedBooking.toString());            
-        }
+        
+        // If return hasn't been called, reassign room ID.
+        displayedBooking.setRoomID(rID);
+        displayedBooking.setCharges(dailyRate * ChronoUnit.DAYS.between(displayedBooking.getCheckIn(), displayedBooking.getCheckOut()));
+        displayArea.setText(displayedBooking.toString());            
     }
     
+    // Updates start date and checks for conflicts.
     public void updateStart() {
         LocalDate start;
         double dailyRate = 0.0;
@@ -174,10 +181,14 @@ public class DisplayBookingController implements Initializable {
             alarm("Start date can not be before today.");
             return;
         }
-        for (Booking booking: bList) {
+        for (Booking booking: bList) {    
             if(booking.getBookingID().equals(displayedBooking.getBookingID()) == false) {
-                if(booking.getCheckIn().compareTo(start) <= 0 && booking.getCheckOut().compareTo(start) > 0 ||
-                   booking.getCheckIn().compareTo(start) <= 0 && booking.getCheckOut().compareTo(displayedBooking.getCheckOut()) >= 0) { // Start of stay can happen on final day of prior booking, but not before the end AND after its start
+                LocalDate displayedStart = displayedBooking.getCheckIn();
+                LocalDate displayedEnd = displayedBooking.getCheckOut();
+                LocalDate bookedStart = booking.getCheckIn();
+                LocalDate bookedEnd = booking.getCheckOut();                
+                if(ChronoUnit.DAYS.between(bookedStart, displayedStart) >= 0 && ChronoUnit.DAYS.between(displayedStart, bookedEnd) < 0 ||
+                   ChronoUnit.DAYS.between(displayedStart, bookedStart) > 0 && ChronoUnit.DAYS.between(displayedEnd, bookedEnd) < 0) { 
                 alarm("Start date conflicts with existing booking " + booking.getBookingID() + ".");
                 return;
                 }
@@ -203,6 +214,7 @@ public class DisplayBookingController implements Initializable {
         displayArea.setText(displayedBooking.toString());
     }
     
+    // Updates end date and checks for conflicts.
     public void updateEnd() {
         LocalDate end;
         Boolean bookingTest = true;
@@ -212,10 +224,15 @@ public class DisplayBookingController implements Initializable {
         } else {
             end = LocalDate.parse(displayedBooking.toString());
         }
-        for (Booking booking: bList) {
+        for (Booking booking: bList) {           
             if(booking.getBookingID().equals(displayedBooking.getBookingID()) == false) {
-                if(booking.getCheckIn().compareTo(end) < 0 && end.compareTo(booking.getCheckOut()) <= 0 ||
-                   booking.getCheckIn().compareTo(displayedBooking.getCheckIn()) <= 0 && booking.getCheckOut().compareTo(end) >= 0) { // Start of stay can happen on final day of prior booking, but not before the end AND after its start
+                LocalDate displayedStart = displayedBooking.getCheckIn();
+                LocalDate displayedEnd = displayedBooking.getCheckOut();
+                LocalDate bookedStart = booking.getCheckIn();
+                LocalDate bookedEnd = booking.getCheckOut(); 
+                
+                if(ChronoUnit.DAYS.between(bookedStart, displayedEnd) > 0 && ChronoUnit.DAYS.between(bookedEnd, displayedEnd) <= 0 ||
+                   ChronoUnit.DAYS.between(displayedStart, bookedStart) > 0 && ChronoUnit.DAYS.between(displayedEnd, bookedEnd) < 0) {
                 bookingTest = false;
                 alarm("End date conflicts with existing booking " + booking.getBookingID() + ".");
                 break;
@@ -234,7 +251,7 @@ public class DisplayBookingController implements Initializable {
     public void deleteBooking() {
         Alert confirmDialog = new Alert(Alert.AlertType.CONFIRMATION);
         confirmDialog.setTitle("Confirmation");
-        confirmDialog.setHeaderText("Are you sure you want to cancel " + bList.get(index).getBookingID() + "? This will also close the window.");
+        confirmDialog.setHeaderText("Are you sure you want to cancel " + displayedBooking.getBookingID() + "? This will also close the window.");
 
         // Show the confirmation dialog and wait for the user's response
         Optional<ButtonType> result = confirmDialog.showAndWait();
@@ -242,7 +259,7 @@ public class DisplayBookingController implements Initializable {
         // Check if the user clicked the OK button
         if (result.isPresent() && result.get() == ButtonType.OK) {
             // User confirmed the exit, delete Booking and close the current window
-            bList.remove(index);
+            bList.remove(displayedBooking);
             Stage currentStage = (Stage) exitBtn.getScene().getWindow();
             currentStage.close();        
         }        

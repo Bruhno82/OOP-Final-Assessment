@@ -83,6 +83,7 @@ public class CheckOutController implements Initializable {
         bList = data.getBookingList();
         cList = data.getClientList();
         rList = data.getRoomList();
+        iList = data.getInvoiceList();
         
         hideFields();
     }    
@@ -92,6 +93,7 @@ public class CheckOutController implements Initializable {
     ArrayList<Booking> bList;
     ArrayList<Client> cList;
     ArrayList<StandardRoom> rList;
+    ArrayList<Invoice> iList;
     
     
     
@@ -181,7 +183,7 @@ public class CheckOutController implements Initializable {
         // Add services
         total = totalRate + charges;
         
-        // Change booking
+        // Charge booking
         for (Booking booking : bList) {
             if (bID.equals(booking.getBookingID())) {
                 booking.setCheckOut(today);
@@ -194,6 +196,9 @@ public class CheckOutController implements Initializable {
                 + "Charges: $%s\nTotal $%s"
                 ,bID, rID, date, today, rate, charges, total);
         invoiceDisplay.setText(invDisplay);
+        
+        // Create invoice
+        iList.add(new Invoice("I" + (iList.size() - 1), cID, total, LocalDate.now(), false));
         
         // Set room as unoccupied
         for (StandardRoom room : rList) {

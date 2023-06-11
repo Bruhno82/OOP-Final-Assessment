@@ -43,7 +43,7 @@ public class DisplayClientController implements Initializable {
     @FXML
     private Button deleteBtn;
     @FXML
-    private Label confirmDisplay;
+    private Label title;
     /**
      * Initializes the controller class.
      */
@@ -63,6 +63,7 @@ public class DisplayClientController implements Initializable {
     public void setValues(Client client) {
         this.client = client;
         this.displayArea.setText(client.toString());
+        this.title.setText("Displaying Client " + client.getClientID());
     }  
     
     // Updates Name field
