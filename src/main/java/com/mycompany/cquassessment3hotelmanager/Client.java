@@ -69,6 +69,6 @@ public class Client {
     
     @Override
     public String toString() {
-        return "Client ID: " + clientID + ", Client Name: " + clientName + "\nPhone No: " + phoneNo + ", Email: " + email + ", Rego No: " + regoNo;
+        return "Client ID: " + clientID + ", Client Name: " + clientName + "\nPhone No: " + phoneNo + ", Email: " + email + ", Rego No: " + regoNo + "\n";
     }  
 }

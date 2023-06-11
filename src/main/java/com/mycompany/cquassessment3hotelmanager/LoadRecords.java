@@ -86,10 +86,25 @@ public class LoadRecords {
                 boolean occupied = Boolean.parseBoolean(roomData[3]);
                 
                 // Create a new StandardRoom object using the data fields
-                StandardRoom room = new StandardRoom(roomId, beds, dailyRate, occupied);
-                
-                // Add the StandardRoom object to the rList ArrayList
-                rList.add(room);
+                if(roomData[0].charAt(0) == 'R') {
+                    StandardRoom room = new StandardRoom(roomId, beds, dailyRate, occupied);  
+                    rList.add(room);
+                }
+                // Create a new StandardRoom object using the data fields
+                if(roomData[0].charAt(0) == 'T') {
+                    StandardRoom room = new TwinRoom(roomId, beds, dailyRate, occupied);
+                    rList.add(room);                    
+                }
+                // Create a new StandardRoom object using the data fields
+                if(roomData[0].charAt(0) == 'K') {
+                    StandardRoom room = new KingRoom(roomId, beds, dailyRate, occupied);
+                    rList.add(room);                    
+                }
+                // Create a new StandardRoom object using the data fields
+                if(roomData[0].charAt(0) == 'S') {
+                    StandardRoom room = new Suite(roomId, beds, dailyRate, occupied);
+                    rList.add(room);
+                }                
             }
                data.setRoomList(rList);
         } catch (IOException e) {

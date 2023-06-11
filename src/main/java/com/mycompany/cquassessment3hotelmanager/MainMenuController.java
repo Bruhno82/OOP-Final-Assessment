@@ -95,7 +95,6 @@ public class MainMenuController implements Initializable {
     // Searches Room ArrayList
     @FXML
     private void searchRooms() {
-        displayArea.setText("");
         String prompt = roomsField.getText();
         for(StandardRoom room: data.getRoomList()) {
             if(room.getRoomID().equals(prompt) == true) {
@@ -103,14 +102,13 @@ public class MainMenuController implements Initializable {
                 break;
             }
             else {
-                displayArea.setText("No room could be found.");
+                displayArea.setText("No room could be found.\n");
             }
         }
     }  
     // Searchs Park ArrayList
     @FXML
     private void searchParks() {
-        displayArea.setText("");
         String prompt = parksField.getText();
         for(Carpark park: data.getParkList()) {
             if(park.getParkID().equals(prompt) == true) {
@@ -118,7 +116,7 @@ public class MainMenuController implements Initializable {
                 break;
             }
             else {
-                displayArea.setText("No park could be found.");
+                displayArea.appendText("No park could be found.\n");
             }
         }        
     } 

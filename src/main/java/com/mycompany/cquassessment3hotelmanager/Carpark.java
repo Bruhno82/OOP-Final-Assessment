@@ -47,7 +47,7 @@ public class Carpark {
     
     @Override
     public String toString() {
-        return "Carpark{" + "parkID=" + parkID + ", regoNo=" + regoNo + ", occupied=" + occupied + '}';
+        return "Carpark{" + "parkID=" + parkID + ", regoNo=" + regoNo + ", occupied=" + occupied + "\n";
     }
     
     

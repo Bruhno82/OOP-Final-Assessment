@@ -58,6 +58,16 @@ public class StandardRoom {
     
     @Override
     public String toString() {
-        return "Room Number: " + roomID + ", Beds: " + beds + "\nDaily Rate: $" + dailyRate + ", Occupied: " + occupied + "\n";
+        String type =  this.getClass().getSimpleName();
+        if(type.equals("StandardRoom")) {
+            type = "Standard";
+        }
+        if(type.equals("TwinRoom")) {
+            type = "Twin";
+        }
+        if(type.equals("KingRoom")) {
+            type = "King";
+        }    
+        return "Room Number: " + roomID + ", Type: " + type + ", Beds: " + beds + "\nDaily Rate: $" + dailyRate + ", Occupied: " + occupied + "\n";
     }
 }
