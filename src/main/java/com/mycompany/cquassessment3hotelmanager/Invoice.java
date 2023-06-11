@@ -20,11 +20,6 @@ public class Invoice {
         this.paid = paid;
         this.date = LocalDate.now();
     }
-    public Invoice (String invoiceNo, LocalDate date, Boolean paid) {
-        this.invoiceNo = invoiceNo;
-        this.date = date; 
-        this.paid = paid;       
-    }
 
     // InvoiceNo Getter and Setter
     public String getInvoiceNo() {
