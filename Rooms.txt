@@ -1,4 +1,4 @@
-R1,1,100,false,
+R1,1,100,true,
 R2,1,100.0,false,
 R3,1,100.0,false,
 T1,2,100.0,false,
