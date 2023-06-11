@@ -30,7 +30,6 @@ import javafx.stage.Stage;
  */
 public class MainMenuController implements Initializable {
 
-
     @FXML
     private TextField roomsField;
     @FXML
@@ -73,18 +72,28 @@ public class MainMenuController implements Initializable {
     private Button roomServiceBtn;
     @FXML
     private Button createBookingBtn;
+    
+    DataSingleton data = DataSingleton.getData();
+    
+    private ArrayList<Booking> bList = data.getBookingList();
+    private ArrayList<StandardRoom> rList = data.getRoomList();
+    private ArrayList<Client> cList = data.getClientList();
+    private ArrayList<Service> sList = data.getServiceList();
+    private ArrayList<Carpark> pList = data.getParkList();
+    private ArrayList<Invoice> iList = data.getInvoiceList();
+    
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+        bList.addAll(data.getBookingList());
+        rList.addAll(data.getRoomList());
+        cList.addAll(data.getClientList());
+        sList.addAll(data.getServiceList());
+        pList.addAll(data.getParkList());
+        iList.addAll(data.getInvoiceList());
     }  
-    private ArrayList<StandardRoom> roomList;
-    private ArrayList<Booking> bookingList;
-    private ArrayList<Carpark> parkList;
-    private ArrayList<Client> clientList;
-    private ArrayList<Client> invoiceList;
 
 
     // Functionality for the various "Search" buttons
@@ -93,7 +102,6 @@ public class MainMenuController implements Initializable {
     private void searchRooms() {
         displayArea.setText("");
         String prompt = roomsField.getText();
-        DataSingleton data = DataSingleton.getData();
         for(StandardRoom room: data.getRoomList()) {
             if(room.getRoomID().equals(prompt) == true) {
                 displayArea.setText(room.toString());
@@ -109,7 +117,6 @@ public class MainMenuController implements Initializable {
     private void searchParks() {
         displayArea.setText("");
         String prompt = parksField.getText();
-        DataSingleton data = DataSingleton.getData();
         for(Carpark park: data.getParkList()) {
             if(park.getParkID().equals(prompt) == true) {
                 displayArea.setText(park.toString());
@@ -126,7 +133,6 @@ public class MainMenuController implements Initializable {
         String prompt = bookingsField.getText();
         int index;
         
-        DataSingleton data = DataSingleton.getData();
         ArrayList<Booking> bList = data.getBookingList();
         
         for(Booking booking: bList) {
@@ -156,7 +162,6 @@ public class MainMenuController implements Initializable {
         String prompt = clientsField.getText();
         int index;
         
-        DataSingleton data = DataSingleton.getData();
         ArrayList<Client> cList = data.getClientList();
         
         for(Client client: cList) {
@@ -191,16 +196,14 @@ public class MainMenuController implements Initializable {
     @FXML
     private void showRooms() {
         displayArea.setText("");
-        DataSingleton data = DataSingleton.getData();
-        roomList = data.getRoomList();
-        for(StandardRoom room: roomList) {
+        rList = data.getRoomList();
+        for(StandardRoom room: rList) {
             displayArea.appendText(room.toString() + "\n");
         }
     }
     @FXML
     private void showBookings() {
         displayArea.setText("");
-        DataSingleton data = DataSingleton.getData();
         for(Booking booking: data.getBookingList()) {
             displayArea.appendText(booking.toString() + "\n");
         }
@@ -208,30 +211,26 @@ public class MainMenuController implements Initializable {
     @FXML 
     private void showParks() {
         displayArea.setText("");
-        DataSingleton data = DataSingleton.getData();
-        parkList = data.getParkList();
-        for(Carpark park: parkList) {
+        pList = data.getParkList();
+        for(Carpark park: pList) {
             displayArea.appendText(park.toString() + "\n");
         }        
     }
     @FXML
     private void showClients() {
         displayArea.setText("");
-        DataSingleton data = DataSingleton.getData();
-        clientList = data.getClientList();
-        for(Client client: clientList) {
+        cList = data.getClientList();
+        for(Client client: cList) {
             displayArea.appendText(client.toString() + "\n");
         }
     }
     @FXML
     private void showInvoices() {
         displayArea.setText("");
-        DataSingleton data = DataSingleton.getData();
         for(Invoice invoice: data.getInvoiceList()) {
             displayArea.appendText(invoice.toString() + "\n");
         }
     }
-    
     
     // Functionality behind the buttons to the side of the display area
     @FXML
@@ -247,6 +246,7 @@ public class MainMenuController implements Initializable {
         bookingStage.initModality(Modality.APPLICATION_MODAL);
         bookingStage.show();
     }
+    
     @FXML
     private void checkInWindow() throws IOException {
         FXMLLoader checkInLoader = new FXMLLoader(this.getClass().getResource("CheckIn.fxml"));
@@ -260,6 +260,7 @@ public class MainMenuController implements Initializable {
         checkInStage.initModality(Modality.APPLICATION_MODAL);
         checkInStage.show();
     }
+    
     @FXML
     private void checkOutWindow() throws IOException {
         FXMLLoader checkOutLoader = new FXMLLoader(this.getClass().getResource("CheckOut.fxml"));
@@ -275,8 +276,10 @@ public class MainMenuController implements Initializable {
     }
     
     @FXML
-    private void saveButton() {
-        
+    private void saveButton() throws IOException {
+        SaveRecords saveRecords = new SaveRecords(bList, rList, cList, sList, pList, iList);
+        saveRecords.saveAll();
+        success("Save success.");
     }
   
     // Exit functionality
@@ -289,5 +292,14 @@ public class MainMenuController implements Initializable {
                 Platform.exit();
             }
         });
+    }
+    
+    // Show success message
+    private void success(String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Success");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }

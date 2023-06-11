@@ -50,7 +50,7 @@ public class SaveRecords {
                         .append(booking.getParkID()).append(",")
                         .append(booking.getCheckIn()).append(",")
                         .append(booking.getCheckOut()).append(",")
-                        .append(booking.getCharges()).append("\n");
+                        .append(booking.getCharges()).append(",\n");
             }
 
             Files.write(path, sb.toString().getBytes());
@@ -156,6 +156,15 @@ public class SaveRecords {
             // Handle file writing error
             e.printStackTrace();
         }
+    }
+    
+    public void saveAll() {
+        saveBookingArrayList();
+        saveRoomArrayList();
+        saveClientArrayList();
+        saveServiceArrayList();
+        saveCarparkArrayList();
+        saveInvoiceArrayList();
     }
     
     public void checkAndCreateFiles() {

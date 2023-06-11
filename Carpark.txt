@@ -1,10 +1,20 @@
-P1,false, ,
-P2,false, ,
-P3,false, ,
-P4,false, ,
-P5,false, ,
-P6,false, ,
-P7,false, ,
-P8,false, ,
-P9,false, ,
-P10,false, ,
+P1,false,false
+P2,false,false
+P3,false,false
+P4,false,false
+P5,false,false
+P6,false,false
+P7,false,false
+P8,false,false
+P9,false,false
+P10,false,false
+P1,false,false
+P2,false,false
+P3,false,false
+P4,false,false
+P5,false,false
+P6,false,false
+P7,false,false
+P8,false,false
+P9,false,false
+P10,false,false
