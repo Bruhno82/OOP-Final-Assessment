@@ -126,15 +126,13 @@ public class MainMenuController implements Initializable {
     @FXML
     private void searchBookings() throws IOException {
         String prompt = bookingsField.getText();
+        boolean test = false;
         int index;
         
         ArrayList<Booking> bList = data.getBookingList();
         
         for(Booking booking: bList) {
-            if(booking.getBookingID().equals(prompt) == false) {
-                displayArea.setText("No booking could be found.");
-            }
-            else {
+            if(booking.getBookingID().equals(prompt)) {
                 index = bList.indexOf(booking);
                 
                 FXMLLoader displayBookingLoader = new FXMLLoader(this.getClass().getResource("DisplayBooking.fxml"));
@@ -148,37 +146,52 @@ public class MainMenuController implements Initializable {
                 displayBookingStage.setScene(displayBookingScene);
                 displayBookingStage.initModality(Modality.APPLICATION_MODAL);
                 displayBookingStage.show();
+                displayArea.setText("Booking " + booking.getBookingID() + " opened in new window.");
+                return;
             }
+            else {
+                test = true;
+            }
+        }
+        if(test == true) {
+            displayArea.setText("No booking could be found.");
         }
     } 
     // Searchs Clients ArrayList
     @FXML   
     private void searchClients() throws IOException {
         String prompt = clientsField.getText();
-        int index;
+        Boolean test = false;
         
         ArrayList<Client> cList = data.getClientList();
         
         for(Client client: cList) {
-            if(client.getClientID().equals(prompt) == false) {
-                displayArea.setText("No booking could be found.");
-            }
-            else {
-                index = cList.indexOf(client);
+            if(client.getClientID().equals(prompt)) {
+                clientsField.setText("");
+                displayArea.appendText("Client " + client.getClientID() + " displayed in new window.\n");                
                 
                 FXMLLoader displayClientLoader = new FXMLLoader(this.getClass().getResource("DisplayClient.fxml"));
                 Parent root = displayClientLoader.load();
 
                 DisplayClientController displayClient = displayClientLoader.getController();
-                displayClient.setValues(index);
+                displayClient.setValues(client);
                 
                 Stage displayClientStage = new Stage();
                 Scene displayClientScene = new Scene(root);
                 displayClientStage.setScene(displayClientScene);
                 displayClientStage.initModality(Modality.APPLICATION_MODAL);
                 displayClientStage.show();
+                
+                return;
+                
             }
-        }              
+            else {
+                test = true;
+            }
+        }
+        if(test == true) {
+            displayArea.appendText("No client could be found.\n");
+        }
     } 
     // Searches Invoices ArrayList
     private void searchInvoices() throws IOException {
@@ -190,39 +203,36 @@ public class MainMenuController implements Initializable {
     // Functionality for the various "Show All" buttons
     @FXML
     private void showRooms() {
-        displayArea.setText("");
-        rList = data.getRoomList();
+        displayArea.appendText("Displaying all Rooms:\n");
         for(StandardRoom room: rList) {
             displayArea.appendText(room.toString() + "\n");
         }
     }
     @FXML
     private void showBookings() {
-        displayArea.setText("");
-        for(Booking booking: data.getBookingList()) {
+        displayArea.appendText("Displaying all Bookings:\n");
+        for(Booking booking: bList) {
             displayArea.appendText(booking.toString() + "\n");
         }
     }
     @FXML 
     private void showParks() {
-        displayArea.setText("");
-        pList = data.getParkList();
+        displayArea.appendText("Displaying all Parks:\n");
         for(Carpark park: pList) {
             displayArea.appendText(park.toString() + "\n");
         }        
     }
     @FXML
     private void showClients() {
-        displayArea.setText("");
-        cList = data.getClientList();
+        displayArea.appendText("Displaying all Clients:\n");
         for(Client client: cList) {
             displayArea.appendText(client.toString() + "\n");
         }
     }
     @FXML
     private void showInvoices() {
-        displayArea.setText("");
-        for(Invoice invoice: data.getInvoiceList()) {
+        displayArea.appendText("Displaying all Invoices:\n");
+        for(Invoice invoice: iList) {
             displayArea.appendText(invoice.toString() + "\n");
         }
     }

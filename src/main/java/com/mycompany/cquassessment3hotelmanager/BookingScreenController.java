@@ -86,7 +86,8 @@ public class BookingScreenController implements Initializable {
         if (custIDField.getText().isBlank() || roomIDField.getText().isBlank()) {
             alarm("ID fields can not be blank.");
             return;
-        }else {
+        }
+        else {
             cID = custIDField.getText();
             rID = roomIDField.getText();
             pID = "";

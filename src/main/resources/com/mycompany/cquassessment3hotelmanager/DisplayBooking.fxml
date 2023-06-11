@@ -45,7 +45,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="325.0" prefWidth="575.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.cquassessment3hotelmanager.DisplayClientController">
+<VBox prefHeight="325.0" prefWidth="575.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.cquassessment3hotelmanager.DisplayBookingController">
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
          <children>
@@ -64,8 +64,8 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <TextField fx:id="cIDField" prefWidth="129.0" GridPane.columnIndex="1" />
-                  <TextField fx:id="rIDField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextField fx:id="clientField" prefWidth="129.0" GridPane.columnIndex="1" />
+                  <TextField fx:id="roomField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <Label text="Client ID:" GridPane.halignment="RIGHT">
                      <GridPane.margin>
                         <Insets right="10.0" />
@@ -86,23 +86,23 @@
                         <Insets right="10.0" />
                      </GridPane.margin>
                   </Label>
-                  <Button fx:id="exitBtn" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="90.0" text="Exit" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
-                  <Button fx:id="deleteBtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Cancel Booking" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
+                  <Button fx:id="exitBtn" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#exitButton" prefHeight="25.0" prefWidth="90.0" text="Exit" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
+                  <Button fx:id="deleteBtn" mnemonicParsing="false" onAction="#deleteBooking" prefHeight="25.0" prefWidth="100.0" text="Cancel Booking" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
                   <Label fx:id="confirmDisplay" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
-                  <Button fx:id="updateCIDBtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Update CID" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
-                  <Button fx:id="updateRIDBtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Update RID" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-                  <Button fx:id="updatePhoneBtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Update Phone" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
-                  <Button fx:id="updateRegoBtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Update Rego" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+                  <Button fx:id="updateCIDBtn" mnemonicParsing="false" onAction="#updateCID" prefHeight="25.0" prefWidth="100.0" text="Update CID" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
+                  <Button fx:id="updateRIDBtn" mnemonicParsing="false" onAction="#updateRID" prefHeight="25.0" prefWidth="100.0" text="Update RID" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                  <Button fx:id="updateStartBtn" mnemonicParsing="false" onAction="#updateStart" prefHeight="25.0" prefWidth="100.0" text="Update Start" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+                  <Button fx:id="updateEndBtn" mnemonicParsing="false" onAction="#updateEnd" prefHeight="25.0" prefWidth="100.0" text="Update End" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
                   <DatePicker fx:id="startDate" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                   <DatePicker fx:id="endDate" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                </children>
             </GridPane>
-            <Label layoutX="25.0" layoutY="2.0" prefHeight="25.0" prefWidth="178.0" text="Displaying Booking B000">
+            <Label fx:id="title" layoutX="25.0" layoutY="2.0" prefHeight="25.0" prefWidth="178.0" text="Displaying Booking B000">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <TextArea fx:id="displayArea" layoutX="14.0" layoutY="39.0" prefHeight="268.0" prefWidth="200.0" />
+            <TextArea fx:id="displayArea" layoutX="14.0" layoutY="39.0" prefHeight="268.0" prefWidth="200.0" wrapText="true" />
             <Label layoutX="333.0" layoutY="2.0" prefHeight="25.0" prefWidth="117.0" text="Update Booking">
                <font>
                   <Font size="16.0" />
