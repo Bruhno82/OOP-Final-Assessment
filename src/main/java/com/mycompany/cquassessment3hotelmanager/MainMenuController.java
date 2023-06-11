@@ -87,12 +87,7 @@ public class MainMenuController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        bList.addAll(data.getBookingList());
-        rList.addAll(data.getRoomList());
-        cList.addAll(data.getClientList());
-        sList.addAll(data.getServiceList());
-        pList.addAll(data.getParkList());
-        iList.addAll(data.getInvoiceList());
+
     }  
 
 
