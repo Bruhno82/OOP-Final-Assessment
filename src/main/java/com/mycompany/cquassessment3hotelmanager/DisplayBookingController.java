@@ -163,87 +163,91 @@ public class DisplayBookingController implements Initializable {
     }
     
     // Updates start date and checks for conflicts.
-    public void updateStart() {
+        public void updateStart() {
         LocalDate start;
         double dailyRate = 0.0;
         int days;
         String rID = displayedBooking.getRoomID();
+
         // Check dates are valid
         if (startDate.getValue() == null) {
             alarm("Dates are not valid.");
             return;
         } else {
-            start = LocalDate.parse(startDate.getValue().toString());
+            start = startDate.getValue();
         }
+
         // Check date is not before today
         LocalDate today = LocalDate.now();
         if (start.isBefore(today)) {
-            alarm("Start date can not be before today.");
+            alarm("Start date cannot be before today.");
             return;
         }
-        for (Booking booking: bList) {    
-            if(booking.getBookingID().equals(displayedBooking.getBookingID()) == false) {
-                LocalDate displayedStart = displayedBooking.getCheckIn();
-                LocalDate displayedEnd = displayedBooking.getCheckOut();
+
+        // Checking if room exists
+        boolean roomExists = false;
+        for (StandardRoom room : rList) {
+            if (rID.equals(room.getRoomID())) {
+                roomExists = true;
+                dailyRate = room.getDailyRate();
+                break;
+            }
+        }
+
+        if (!roomExists) {
+            alarm("No matching room could be found.");
+            return;
+        }
+
+        // Checking for conflicts with other bookings
+        for (Booking booking : bList) {
+            if (!booking.getBookingID().equals(displayedBooking.getBookingID()) && booking.getRoomID().equals(rID)) {
                 LocalDate bookedStart = booking.getCheckIn();
-                LocalDate bookedEnd = booking.getCheckOut();                
-                if(ChronoUnit.DAYS.between(bookedStart, displayedStart) >= 0 && ChronoUnit.DAYS.between(displayedStart, bookedEnd) < 0 ||
-                   ChronoUnit.DAYS.between(displayedStart, bookedStart) > 0 && ChronoUnit.DAYS.between(displayedEnd, bookedEnd) < 0) { 
-                alarm("Start date conflicts with existing booking " + booking.getBookingID() + ".");
-                return;
+                LocalDate bookedEnd = booking.getCheckOut();
+
+                if (start.isBefore(bookedEnd) && start.plusDays(1).isAfter(bookedStart)) {
+                    alarm("Start date conflicts with existing booking " + booking.getBookingID() + ".");
+                    return;
                 }
             }
         }
-        // Testing if dates are correct.
-        if(displayedBooking.getCheckOut().compareTo(start) <= 0) {
-            alarm("End of stay cannot occur before beginning of stay.\n"
-                    + "Booking cannot start and end on the same day.");
-            return;
-        }        
-        // Checking if room exists.
-        for(StandardRoom room: rList) {
-            if(rID.equals(room.getRoomID())) {
-                dailyRate = room.getDailyRate();
-                break;
-            } 
-        }           
-        // If everything is fine, alter the start date.
-        days = displayedBooking.getCheckOut().compareTo(start);
+
+        // Updating the start date and charges for the displayed booking
+        days = (int) ChronoUnit.DAYS.between(displayedBooking.getCheckIn(), displayedBooking.getCheckOut());
         displayedBooking.setCheckIn(start);
-        displayedBooking.setCharges(days * dailyRate);        
+        displayedBooking.setCharges(days * dailyRate);
         displayArea.setText(displayedBooking.toString());
     }
     
     // Updates end date and checks for conflicts.
     public void updateEnd() {
         LocalDate end;
-        Boolean bookingTest = true;
+        boolean bookingTest = true;
+
         if (endDate.getValue() == null) {
             alarm("Dates are not valid.");
             return;
         } else {
-            end = LocalDate.parse(displayedBooking.toString());
+            end = endDate.getValue();
         }
-        for (Booking booking: bList) {           
-            if(booking.getBookingID().equals(displayedBooking.getBookingID()) == false) {
-                LocalDate displayedStart = displayedBooking.getCheckIn();
-                LocalDate displayedEnd = displayedBooking.getCheckOut();
+
+        for (Booking booking : bList) {
+            if (!booking.getBookingID().equals(displayedBooking.getBookingID()) && booking.getRoomID().equals(displayedBooking.getRoomID())) {
                 LocalDate bookedStart = booking.getCheckIn();
-                LocalDate bookedEnd = booking.getCheckOut(); 
-                
-                if(ChronoUnit.DAYS.between(bookedStart, displayedEnd) > 0 && ChronoUnit.DAYS.between(bookedEnd, displayedEnd) <= 0 ||
-                   ChronoUnit.DAYS.between(displayedStart, bookedStart) > 0 && ChronoUnit.DAYS.between(displayedEnd, bookedEnd) < 0) {
-                bookingTest = false;
-                alarm("End date conflicts with existing booking " + booking.getBookingID() + ".");
-                break;
+                LocalDate bookedEnd = booking.getCheckOut();
+
+                if (end.isAfter(bookedStart) && end.isBefore(bookedEnd)) {
+                    bookingTest = false;
+                    alarm("End date conflicts with existing booking " + booking.getBookingID() + ".");
+                    break;
                 }
             }
         }
-        if(bookingTest == true) {
+
+        if (bookingTest) {
             displayedBooking.setCheckOut(end);
             displayArea.setText(displayedBooking.toString());
-        }
-        else {
+        } else {
             alarm("End date could not be altered.");
         }
     }
@@ -259,7 +263,13 @@ public class DisplayBookingController implements Initializable {
         // Check if the user clicked the OK button
         if (result.isPresent() && result.get() == ButtonType.OK) {
             // User confirmed the exit, delete Booking and close the current window
-            bList.remove(displayedBooking);
+            displayedBooking.setBookingID("0");
+            displayedBooking.setCharges(0);
+            displayedBooking.setCheckIn(null);
+            displayedBooking.setCheckOut(null);
+            displayedBooking.setClientID("");
+            displayedBooking.setParkID("");
+            displayedBooking.setRoomID("");
             Stage currentStage = (Stage) exitBtn.getScene().getWindow();
             currentStage.close();        
         }        
