@@ -151,15 +151,15 @@ public class MainMenuController implements Initializable {
                 displayBookingStage.initModality(Modality.APPLICATION_MODAL);
                 displayBookingStage.show();
                 bookingsField.setText("");
-                displayArea.appendText("SEARCH RESULTS:\nBooking " + booking.getBookingID() + " opened in new window.");
+                displayArea.appendText("SEARCH RESULTS:\nBooking " + booking.getBookingID() + " opened in new window.\n");
                 return;
             }
             else {
                 test = true;
             }
         }
-        if(test == true) {
-            displayArea.setText("No booking could be found.");
+        if(test == false) {
+            displayArea.setText("No booking could be found.\n");
         }
     } 
     // Searchs Clients ArrayList
