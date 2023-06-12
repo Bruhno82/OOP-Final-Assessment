@@ -155,10 +155,14 @@ public class CheckInController implements Initializable {
     @FXML
     public void checkIn() throws IOException {
         // Check for early check in
-        if (LocalDate.now().isBefore(date) || LocalDate.now().isEqual(date)) {
+        if (LocalDate.now().isBefore(date) ) {
             Alert confirmDialog = new Alert(Alert.AlertType.CONFIRMATION);
             confirmDialog.setTitle("Confirmation");
             confirmDialog.setHeaderText("Do you want to check this customer in early?");
+        } else if(LocalDate.now().isEqual(date)) {
+            Alert confirmDialog = new Alert(Alert.AlertType.CONFIRMATION);
+            confirmDialog.setTitle("Confirmation");
+            confirmDialog.setHeaderText("Do you want to check this customer in?");
 
             // Show the confirmation dialog and wait for the user's response
             Optional<ButtonType> result = confirmDialog.showAndWait();
