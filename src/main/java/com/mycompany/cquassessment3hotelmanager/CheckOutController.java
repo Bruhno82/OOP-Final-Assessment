@@ -84,6 +84,7 @@ public class CheckOutController implements Initializable {
         cList = data.getClientList();
         rList = data.getRoomList();
         iList = data.getInvoiceList();
+        pList = data.getParkList();
         
         hideFields();
     }    
@@ -94,6 +95,7 @@ public class CheckOutController implements Initializable {
     ArrayList<Client> cList;
     ArrayList<StandardRoom> rList;
     ArrayList<Invoice> iList;
+    ArrayList<Carpark> pList;
     
     
     
@@ -188,8 +190,18 @@ public class CheckOutController implements Initializable {
             if (bID.equals(booking.getBookingID())) {
                 booking.setCheckOut(today);
                 booking.setCharges(total);
+
+                String carParkID = booking.getParkID();
+                for (Carpark carpark : pList) {
+                    if (carParkID.equals(carpark.getParkID())) {
+                        carpark.setOccupied(false);
+                        carpark.setRegoNo(" ");
+                        break; // Exit the loop after finding the corresponding car park
+                    }
+                }
             }
         }
+        
         
         // Display invoice
         String invDisplay = String.format("Booking No: %s\nRoom No: %s\nCheck In date: %s\nCheck Out date: %s\nDaily Rate: %s\n"
