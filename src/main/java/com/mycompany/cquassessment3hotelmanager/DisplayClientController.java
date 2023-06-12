@@ -74,6 +74,7 @@ public class DisplayClientController implements Initializable {
         }
         if (nameField.getText().contains(",")) {
             alarm("Name field cannot contain a comma.");
+            return;
         }
         client.setClientName(nameField.getText());
         displayArea.setText(client.toString());
@@ -87,6 +88,7 @@ public class DisplayClientController implements Initializable {
         }
         if (emailField.getText().contains(",")) {
             alarm("Email field cannot contain a comma.");
+            return;
         }
         client.setEmail(emailField.getText());
         displayArea.setText(client.toString());        
@@ -99,6 +101,7 @@ public class DisplayClientController implements Initializable {
         }
         if (phoneField.getText().contains(",")) {
             alarm("Phone field cannot contain a comma.");
+            return;
         }
         client.setPhoneNo(phoneField.getText());
         displayArea.setText(client.toString());        
@@ -111,6 +114,7 @@ public class DisplayClientController implements Initializable {
         }
         if (regoField.getText().contains(",")) {
             alarm("Rego field cannot contain a comma.");
+            return;
         }
         client.setRegoNo(regoField.getText());
         displayArea.setText(client.toString());        
@@ -128,11 +132,10 @@ public class DisplayClientController implements Initializable {
         // Check if the user clicked the OK button
         if (result.isPresent() && result.get() == ButtonType.OK) {
             // User confirmed the exit, delete Booking and close the current window
-            client.setClientID("0");
             client.setClientName("Deleted");
-            client.setEmail("");
-            client.setPhoneNo("");
-            client.setRegoNo("");
+            client.setEmail(" ");
+            client.setPhoneNo(" ");
+            client.setRegoNo(" ");
             Stage currentStage = (Stage) exitBtn.getScene().getWindow();
             currentStage.close();        
         }        

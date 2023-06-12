@@ -263,13 +263,12 @@ public class DisplayBookingController implements Initializable {
         // Check if the user clicked the OK button
         if (result.isPresent() && result.get() == ButtonType.OK) {
             // User confirmed the exit, delete Booking and close the current window
-            displayedBooking.setBookingID("0");
             displayedBooking.setCharges(0);
-            displayedBooking.setCheckIn(null);
-            displayedBooking.setCheckOut(null);
-            displayedBooking.setClientID("");
-            displayedBooking.setParkID("");
-            displayedBooking.setRoomID("");
+            displayedBooking.setCheckIn(LocalDate.parse("1970-01-01"));
+            displayedBooking.setCheckOut(LocalDate.parse("1970-01-01"));
+            displayedBooking.setClientID(" ");
+            displayedBooking.setParkID(" ");
+            displayedBooking.setRoomID(" ");
             Stage currentStage = (Stage) exitBtn.getScene().getWindow();
             currentStage.close();        
         }        
