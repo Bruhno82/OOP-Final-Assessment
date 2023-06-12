@@ -144,14 +144,10 @@ public class BookingScreenController implements Initializable {
         for(StandardRoom room: rList) {
             if(rID.equals(room.getRoomID())) {
                 roomTest = true;
-                pID = "P" + rList.indexOf(room);
+                pID = "P" + (rList.indexOf(room) + 1);
                 cost = room.getDailyRate() * ChronoUnit.DAYS.between(start, end);
                 break;
             }
-        }
-        if(roomTest == false) {
-            alarm("Room could not be found.");
-            return;
         }
         // Testing if the booking will overlap with other bookings in the same room.
         for(Booking booking: bList) {          
