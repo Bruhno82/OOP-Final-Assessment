@@ -81,7 +81,7 @@
                         <Insets right="8.0" />
                      </GridPane.margin>
                   </Label>
-                  <Button fx:id="exitBtn" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="60.0" text="Exit" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
+                  <Button fx:id="exitBtn" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleExit" prefHeight="25.0" prefWidth="60.0" text="Exit" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
                   <Button fx:id="addServiceBtn" mnemonicParsing="false" onAction="#saveService" text="Add Service" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
                   <Label fx:id="confirmDisplay" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
                   <Button fx:id="searchBut" mnemonicParsing="false" onAction="#searchBooking" text="search" GridPane.columnIndex="2" GridPane.rowIndex="1" />

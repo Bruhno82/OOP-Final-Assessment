@@ -7,14 +7,17 @@ package com.mycompany.cquassessment3hotelmanager;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 /**
  * FXML Controller class
  *
@@ -187,5 +190,23 @@ public class RoomServiceController implements Initializable {
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
+    }
+    
+    @FXML
+    private void handleExit() {
+        // Create a confirmation dialog
+        Alert confirmDialog = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmDialog.setTitle("Confirmation");
+        confirmDialog.setHeaderText("Are you sure you want to exit?");
+
+        // Show the confirmation dialog and wait for the user's response
+        Optional<ButtonType> result = confirmDialog.showAndWait();
+
+        // Check if the user clicked the OK button
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            // User confirmed the exit, close the current window
+            Stage currentStage = (Stage) exitBtn.getScene().getWindow();
+            currentStage.close();
+        }    
     }
 }

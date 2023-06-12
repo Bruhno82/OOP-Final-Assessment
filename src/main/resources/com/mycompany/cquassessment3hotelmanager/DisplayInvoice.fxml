@@ -49,7 +49,7 @@
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
          <children>
-            <TextArea fx:id="displayArea" layoutX="14.0" layoutY="34.0" prefHeight="50.0" prefWidth="350.0" />
+            <TextArea fx:id="displayArea" editable="false" layoutX="14.0" layoutY="34.0" prefHeight="50.0" prefWidth="350.0" />
             <Label fx:id="title" layoutX="14.0" layoutY="4.0" prefHeight="35.0" prefWidth="167.0" text="Displaying Invoice I000">
                <font>
                   <Font size="16.0" />
