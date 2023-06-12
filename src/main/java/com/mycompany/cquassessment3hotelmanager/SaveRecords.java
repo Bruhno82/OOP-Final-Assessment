@@ -147,6 +147,8 @@ public class SaveRecords {
 
             for (Invoice invoice : iList) {
                 sb.append(invoice.getInvoiceNo()).append(",")
+                        .append(invoice.getClientID()).append(",")
+                        .append(invoice.getPrice()).append(",")
                         .append(invoice.getDate()).append(",")
                         .append(invoice.getPaid()).append("\n");
             }
