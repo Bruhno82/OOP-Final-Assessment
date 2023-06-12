@@ -144,6 +144,15 @@ public class CheckOutController implements Initializable {
             }
             
             if (bookingFound) {
+                // Check room is occupied
+                for (StandardRoom room : rList) {
+                    if (room.getRoomID().equals(rID)) {
+                        if (!room.getOccupied()) {
+                            alarm("Room is not occupied.");
+                            return;
+                        }
+                    }
+                }
                 // Fill fields
                 clientField.setText(cID);
                 roomField.setText(rID);
