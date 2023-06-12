@@ -137,15 +137,15 @@ public class DisplayBookingController implements Initializable {
         // Checking that updated booking won't conflict with other bookings.
         if(roomTest == true) {
             for(Booking booking: bList) {
-                if(booking.getBookingID().equals(displayedBooking.getBookingID()) == false) {
-                    if(booking.getRoomID().equals(displayedBooking.getRoomID())) {
+                if(booking.getRoomID().equals(rID)) {
+                    if(booking.getBookingID().equals(displayedBooking.getBookingID()) == false) {
                         LocalDate displayedStart = displayedBooking.getCheckIn();
                         LocalDate displayedEnd = displayedBooking.getCheckOut();
                         LocalDate bookedStart = booking.getCheckIn();
                         LocalDate bookedEnd = booking.getCheckOut();
                     
                         // Check to make sure the booking doesn't conflict with an existing booking. Explanation of code is in BookingScreenController.
-                        if(ChronoUnit.DAYS.between(bookedStart, displayedStart) >= 0 && ChronoUnit.DAYS.between(displayedStart, bookedEnd) < 0  ||
+                        if(ChronoUnit.DAYS.between(bookedStart, displayedStart) >= 0 && ChronoUnit.DAYS.between(bookedEnd, displayedStart) < 0  ||
                                 ChronoUnit.DAYS.between(bookedStart, displayedEnd) > 0 && ChronoUnit.DAYS.between(bookedEnd, displayedEnd) <= 0 ||
                                 ChronoUnit.DAYS.between(displayedStart, bookedStart) > 0 && ChronoUnit.DAYS.between(displayedEnd, bookedEnd) < 0) {
                             alarm("Room assignment conflicts with existing booking " + booking.getBookingID() + ".");
