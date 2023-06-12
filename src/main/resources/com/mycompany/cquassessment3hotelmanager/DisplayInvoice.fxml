@@ -70,6 +70,11 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
+                  <CheckBox fx:id="paidBox" mnemonicParsing="false" onAction="#updatePaid" text="Paid?" GridPane.halignment="CENTER">
+                     <GridPane.margin>
+                        <Insets right="60.0" />
+                     </GridPane.margin>
+                  </CheckBox>
                   <TextField fx:id="totalField" GridPane.columnIndex="1" />
                   <Label text="Total ($):" GridPane.halignment="RIGHT">
                      <padding>
@@ -78,11 +83,6 @@
                   </Label>
                   <Button fx:id="updateTotalBtn" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#updatePrice" prefHeight="25.0" prefWidth="90.0" text="Update Total" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
                   <Button fx:id="exitBtn" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#exitWindow" prefHeight="25.0" prefWidth="60.0" text="Exit" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
-                  <CheckBox fx:id="paidBox" mnemonicParsing="false" onAction="#updatePaid" text="Paid?" GridPane.halignment="CENTER">
-                     <GridPane.margin>
-                        <Insets right="60.0" />
-                     </GridPane.margin>
-                  </CheckBox>
                </children>
             </GridPane>
          </children>

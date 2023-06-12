@@ -69,38 +69,38 @@
                         <Insets />
                      </GridPane.margin>
                   </TextField>
-                  <TextField fx:id="clientsField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="104.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
-                     <GridPane.margin>
-                        <Insets />
-                     </GridPane.margin>
-                  </TextField>
                   <Button fx:id="searchRoomsBtn" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#searchRooms" prefHeight="25.0" prefWidth="104.0" text="Search Rooms" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                      <GridPane.margin>
                         <Insets />
                      </GridPane.margin>
                   </Button>
+                  <Button fx:id="showRoomsBtn" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#showRooms" prefHeight="25.0" prefWidth="104.0" text="Show All" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+                  <TextField fx:id="parksField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="104.0" GridPane.columnIndex="1" />
+                  <Button fx:id="searchParksBtn" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#searchParks" prefHeight="25.0" prefWidth="104.0" text="Search Parks" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Button fx:id="showParksBtn" mnemonicParsing="false" onAction="#showParks" prefHeight="25.0" prefWidth="104.0" text="Show All" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <TextField fx:id="clientsField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="104.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                  </TextField>
                   <Button fx:id="searchClientsBtn" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#searchClients" prefHeight="25.0" prefWidth="104.0" text="Search Clients" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                      <GridPane.margin>
                         <Insets />
                      </GridPane.margin>
                   </Button>
+                  <Button fx:id="showClientsBtn" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#showClients" prefHeight="25.0" prefWidth="104.0" text="Show All" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+                  <TextField fx:id="bookingsField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="104.0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                  <Button fx:id="searchBookingsBtn" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#searchBookings" prefHeight="25.0" prefWidth="104.0" text="Search Bookings" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                  <Button fx:id="showBookingsBtn" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#showBookings" prefHeight="25.0" prefWidth="104.0" text="Show All" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+                  <TextField fx:id="invoicesField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="104.0" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                   <Button fx:id="searchInvoiceBtn" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#searchInvoices" prefHeight="25.0" prefWidth="104.0" text="Search Invoices" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                      <GridPane.margin>
                         <Insets />
                      </GridPane.margin>
                   </Button>
-                  <Button fx:id="showClientsBtn" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#showClients" prefHeight="25.0" prefWidth="104.0" text="Show All" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
-                  <Button fx:id="showRoomsBtn" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#showRooms" prefHeight="25.0" prefWidth="104.0" text="Show All" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
                   <Button fx:id="showInvoicesBtn" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#showInvoices" prefHeight="25.0" prefWidth="104.0" text="Show All" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
                   <Button fx:id="saveBtn" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#saveButton" prefHeight="25.0" prefWidth="104.0" text="Save" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
                   <Button fx:id="exitBtn" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#exitButton" prefHeight="25.0" prefWidth="104.0" text="Exit" textAlignment="CENTER" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-                  <TextField fx:id="bookingsField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="104.0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-                  <Button fx:id="searchBookingsBtn" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#searchBookings" prefHeight="25.0" prefWidth="104.0" text="Search Bookings" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-                  <TextField fx:id="invoicesField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="104.0" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-                  <Button fx:id="showBookingsBtn" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#showBookings" prefHeight="25.0" prefWidth="104.0" text="Show All" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-                  <TextField fx:id="parksField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="104.0" GridPane.columnIndex="1" />
-                  <Button fx:id="searchParksBtn" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#searchParks" prefHeight="25.0" prefWidth="104.0" text="Search Parks" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <Button fx:id="showParksBtn" mnemonicParsing="false" onAction="#showParks" prefHeight="25.0" prefWidth="104.0" text="Show All" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                </children>
             </GridPane>
             <TextArea fx:id="displayArea" editable="false" layoutX="6.0" layoutY="35.0" prefHeight="255.0" prefWidth="587.0" />
@@ -116,10 +116,10 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
+                  <Button fx:id="createBookingBtn" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#bookingWindow" prefHeight="25.0" prefWidth="104.0" text="Create Booking" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                   <Button fx:id="checkInBtn" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#checkInWindow" prefHeight="25.0" prefWidth="104.0" text="Check In" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
                   <Button fx:id="checkOutBtn" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#checkOutWindow" prefHeight="25.0" prefWidth="104.0" text="Check Out" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
                   <Button fx:id="roomServiceBtn" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#roomServiceWindow" prefHeight="25.0" prefWidth="104.0" text="Room Service" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-                  <Button fx:id="createBookingBtn" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#bookingWindow" prefHeight="25.0" prefWidth="104.0" text="Create Booking" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                </children>
             </GridPane>
             <Label layoutX="8.0" layoutY="2.0" text="Hotel Management System 2023">

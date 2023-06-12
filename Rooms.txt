@@ -1,7 +1,7 @@
 R1,1,100.0,false
 R2,1,100.0,false
 R3,1,100.0,false
-T1,2,100.0,false
+T1,2,150.0,false
 T2,2,150.0,false
 T3,2,150.0,false
 K1,1,175.0,false

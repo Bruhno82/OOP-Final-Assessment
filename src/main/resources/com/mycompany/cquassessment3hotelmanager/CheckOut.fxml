@@ -64,6 +64,9 @@
               </rowConstraints>
                <children>
                   <TextField fx:id="bookingField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Button fx:id="searchBtn" mnemonicParsing="false" onAction="#searchBooking" text="Search" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                  <Button fx:id="checkOutBtn" mnemonicParsing="false" onAction="#checkOut" text="Check Out" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
+                  <Button fx:id="exitBtn" mnemonicParsing="false" onAction="#handleExit" prefHeight="25.0" prefWidth="72.0" text="Exit" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
                   <TextField fx:id="clientField" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                   <Label text="Booking ID:" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
                      <padding>
@@ -75,7 +78,6 @@
                         <Insets right="8.0" />
                      </padding>
                   </Label>
-                  <Button fx:id="checkOutBtn" mnemonicParsing="false" onAction="#checkOut" text="Check Out" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
                   <Label fx:id="checkOutDisplay" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
                   <TextArea fx:id="invoiceDisplay" editable="false" prefHeight="110.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="1" GridPane.rowSpan="3" />
                   <Label text="Invoice Display" GridPane.columnIndex="3" GridPane.halignment="CENTER">
@@ -83,13 +85,11 @@
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <Button fx:id="exitBtn" mnemonicParsing="false" onAction="#handleExit" prefHeight="25.0" prefWidth="72.0" text="Exit" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
                   <Label text="Check Out" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <Button fx:id="searchBtn" mnemonicParsing="false" onAction="#searchBooking" text="Search" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
                   <TextField fx:id="roomField" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                   <TextField fx:id="dateField" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                   <Label fx:id="roomLabel" text="Room ID:" GridPane.halignment="RIGHT" GridPane.rowIndex="3" GridPane.valignment="CENTER">
