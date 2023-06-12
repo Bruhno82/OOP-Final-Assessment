@@ -20,9 +20,9 @@ public class DataSingleton {
     private static ArrayList<Carpark> parkList = new ArrayList<>();
     private static ArrayList<Invoice> invoiceList = new ArrayList<>();
     
-    private static int bookingCounter = 1;
-    private static int clientCounter = 1;
-    private static int invoiceCounter = 1;
+    private static int bookingCounter;
+    private static int clientCounter;
+    private static int invoiceCounter;
     
     public static DataSingleton getData() {
         return dataStorage;
@@ -78,6 +78,7 @@ public class DataSingleton {
     
     // BookingCounter Getter and Setter
     public int getBookingCounter() {
+        bookingCounter = bookingList.size() + 1;
         return bookingCounter;
     }
     public void setBookingCounter(int bookingCounter) {
@@ -86,6 +87,7 @@ public class DataSingleton {
 
     // ClientCounter Getter and Setter
     public int getClientCounter() {
+        clientCounter = clientList.size() + 1;
         return clientCounter;
     }
     public void setClientCounter(int clientCounter) {
@@ -94,9 +96,10 @@ public class DataSingleton {
     
     // ServiceCounter Getter and Setter
     public int getInvoiceCounter() {
+        invoiceCounter = invoiceList.size() + 1;
         return invoiceCounter;
     }
-    public void setInvoiceCounter(int invoiceCounter) {
+    public void setInvoiceCounter(int invoiceCounter) { 
         this.invoiceCounter = invoiceCounter;
     }    
 }

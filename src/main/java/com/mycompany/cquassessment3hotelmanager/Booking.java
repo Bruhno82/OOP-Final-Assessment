@@ -35,6 +35,12 @@ public class Booking {
     public String getBookingID() {
         return bookingID;
     }
+    
+    // Booking ID Setter
+    public void setBookingID(String bookingID) {
+        this.bookingID = bookingID;
+    }
+    
 
     // Client ID Getter and Setter.
     public String getClientID() {

@@ -1,1 +1,2 @@
 C1,Max Power,phonenumber,max@email.com,reg001
+C2,Max Power,phonenumber,max@email.com,reg001

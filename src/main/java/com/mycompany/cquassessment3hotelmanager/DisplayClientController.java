@@ -128,7 +128,11 @@ public class DisplayClientController implements Initializable {
         // Check if the user clicked the OK button
         if (result.isPresent() && result.get() == ButtonType.OK) {
             // User confirmed the exit, delete Booking and close the current window
-            cList.remove(client);
+            client.setClientID("0");
+            client.setClientName("Deleted");
+            client.setEmail("");
+            client.setPhoneNo("");
+            client.setRegoNo("");
             Stage currentStage = (Stage) exitBtn.getScene().getWindow();
             currentStage.close();        
         }        

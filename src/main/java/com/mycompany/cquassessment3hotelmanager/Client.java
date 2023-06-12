@@ -29,6 +29,11 @@ public class Client {
         return clientID;
     }
     
+    // Client ID Setter
+    public void setClientID(String clientID) {
+        this.clientID = clientID;
+    }
+    
     // Client Name Getter and Setter
     public String getClientName() {
         return clientName;

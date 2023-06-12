@@ -237,28 +237,36 @@ public class MainMenuController implements Initializable {
     private void showRooms() {
         displayArea.appendText("DISPLAYING ALL ROOMS:\n");
         for(StandardRoom room: rList) {
-            displayArea.appendText(room.toString() + "\n");
+            if (!room.getRoomID().equals("0")) {
+                displayArea.appendText(room.toString() + "\n");
+            }
         }
     }
     @FXML
     private void showBookings() {
         displayArea.appendText("DISPLAYING ALL BOOKINGS:\n");
         for(Booking booking: bList) {
-            displayArea.appendText(booking.toString() + "\n");
+            if (!booking.getBookingID().equals("0")) {
+                displayArea.appendText(booking.toString() + "\n");
+            }
         }
     }
     @FXML 
     private void showParks() {
         displayArea.appendText("DISPLAYING ALL PARKS:\n");
         for(Carpark park: pList) {
-            displayArea.appendText(park.toString() + "\n");
+            if (!park.getParkID().equals("0")) {
+                displayArea.appendText(park.toString() + "\n");
+            }
         }        
     }
     @FXML
     private void showClients() {
         displayArea.appendText("DISPLAYING ALL CLIENTS:\n");
         for(Client client: cList) {
-            displayArea.appendText(client.toString() + "\n");
+            if (!client.getClientID().equals("0")) {
+                displayArea.appendText(client.toString() + "\n");
+            }
         }
     }
     @FXML
