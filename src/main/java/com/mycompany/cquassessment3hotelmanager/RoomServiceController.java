@@ -145,6 +145,12 @@ public class RoomServiceController implements Initializable {
             return;
         }
         
+        // Prevents a rogue comma from bricking LoadRecords
+        if(serviceField.getText().contains(",")) {
+            alarm("Service cannot contain a comma.");
+            return;
+        }
+        
         if (costField.getText().isBlank()) {
             alarm("Enter a service cost.");
         } else {

@@ -112,7 +112,17 @@ public class BookingScreenController implements Initializable {
             alarm("Start date can not be before today.");
             return;
         }
-
+        
+        if (end.isBefore(start)) {
+            alarm("Start date can not be before end date.");
+            return;
+        }
+        
+        if (start.compareTo(end) == 0) {
+            alarm("Start and end date cannot be the same.");
+            return;
+        }
+        
         boolean clientTest = false;
         boolean roomTest = false;
         boolean bookingTest = true; // True by default so we don't have to test for an empty array.
