@@ -76,6 +76,7 @@ public class CheckInController implements Initializable {
         bList = data.getBookingList();
         cList = data.getClientList();
         rList = data.getRoomList();
+        pList = data.getParkList();
         
         // Hide fields
         hideFields();
@@ -88,6 +89,7 @@ public class CheckInController implements Initializable {
     ArrayList<Booking> bList;
     ArrayList<Client> cList;
     ArrayList<StandardRoom> rList;
+    ArrayList<Carpark> pList;
     
     
     public void hideFields() {
@@ -153,7 +155,7 @@ public class CheckInController implements Initializable {
     @FXML
     public void checkIn() throws IOException {
         // Check for early check in
-        if (LocalDate.now().isBefore(date)) {
+        if (LocalDate.now().isBefore(date) || LocalDate.now().isEqual(date)) {
             Alert confirmDialog = new Alert(Alert.AlertType.CONFIRMATION);
             confirmDialog.setTitle("Confirmation");
             confirmDialog.setHeaderText("Do you want to check this customer in early?");
@@ -172,8 +174,27 @@ public class CheckInController implements Initializable {
                         } else {
                             for (Booking booking : bList) {
                                 if (bID.equals(booking.getBookingID())) {
+                                    int bIndex = bList.indexOf(booking);
                                     booking.setCheckIn(LocalDate.now());
                                     room.setOccupied(true);
+                                    
+                                    // Reserve car park
+                                    String regoNo = " ";
+                                    String carParkID = booking.getParkID();
+                                    for (Carpark carpark : pList) {
+                                        if (carParkID.equals(carpark.getParkID())) {
+                                            carpark.setOccupied(true);
+                                            for (Client client : cList) {
+                                                if (client.getClientID().equals(cID)) {
+                                                    regoNo = client.getRegoNo();
+                                                    break; // Exit the loop after finding the client's registration number
+                                                }
+                                            }
+                                            carpark.setRegoNo(regoNo);
+                                            break; // Exit the loop after finding the corresponding car park
+                                        }
+                                    }
+                                    
                                     success("Check-in success.");
                                     // Close the window
                                     Stage currentStage = (Stage) exitBtn.getScene().getWindow();
